@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
+    
+    <title>php 连接 mysql 操纵数据库 | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
+    <meta name="keywords" content="前端, Web, 徐枝国, 前端开发" >
+    <meta name="description" content="徐枝国个人前端小站" >
+
+    
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml" >
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico" >
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</head>
+
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">Hexo</span>
+                    <span class="description">个人前端小站</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2017/04/17/php-connect-mysql/index.html" class="item ">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2017/04/17/php-connect-mysql/index.html" class="item ">
+                <a href="/lab/" title="实验室" class="icon-lab">&nbsp;实验室</a>
+            </li>
+            
+            <li rel="/2017/04/17/php-connect-mysql/index.html" class="item ">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2017/04/17/php-connect-mysql/index.html" class="item ">
+                <a href="/comment/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        徐枝国
+                        |
+                    
+                        WEB 前端开发工程师
+                        |
+                    
+                        17620136588
+                        
+                    
+                </p>
+                <p class="sns">
+                    
+                        <a href="https://github.com/xuzhiguo" class="qqweibo" target="_blank"><b>■</b> github</a>
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        微信号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/jelon.jpg" alt="avatar" title="头像" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>php 连接 mysql 操纵数据库</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        xuzg 发表于
+        <time datetime="2017-04-16T16:00:00.000Z">2017-04-17</time>
+    </p>
+    <div class="post-content">
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在前端开发中，我们需要各种各样的数据渲染页面。关闭浏览器后，我们页面上的数据也没了，而这些数据量大的话是不可能存在浏览器 <strong>cookie</strong> 或 <strong>localStorage</strong> 中的。我目前接触的项目都是前后端分离的，所需的数据都是直接调后台接口取，所以想自己了解一下接口的实现。当然很多种语言都可以写接口，这里选PHP是因为我觉得PHP和js的语法规则还是挺像的。话不多说，开始写demo，这是一个面向对象使用ysqli连接mysql的demo。</p>
+<h3 id="封装一个mysql类"><a href="#封装一个mysql类" class="headerlink" title="封装一个mysql类"></a>封装一个mysql类</h3><blockquote>
+<p>第一步：新建一个 mysql 类，创建连接、查询、插入等方法</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">     class mysql &#123;</span><br><span class="line">     </span><br><span class="line">         // 连接</span><br><span class="line">         public function connect() &#123;</span><br><span class="line">             </span><br><span class="line">         &#125;</span><br><span class="line">         </span><br><span class="line">         // 查询</span><br><span class="line">         public function query() &#123;</span><br><span class="line">             </span><br><span class="line">         &#125;</span><br><span class="line">         </span><br><span class="line">         // 插入</span><br><span class="line">         public function insert() &#123;</span><br><span class="line">             </span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line"> ?&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>第二步：开始写连接的方法</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 连接</span><br><span class="line">public function connect() &#123;</span><br><span class="line">    $dbhost = &apos;0.0.0.0&apos;;  // 这里填你要连接的数据库的ip地址  </span><br><span class="line">    $username = &apos;root&apos;;</span><br><span class="line">    $userpass = &apos;123456&apos;;</span><br><span class="line">    $dbdatabase = &apos;mybase&apos;;  // 数据库名</span><br><span class="line"></span><br><span class="line">    // 创建连接</span><br><span class="line">    $conn = new mysqli($dbhost, $username, $userpass, $dbdatabase);</span><br><span class="line">    // 检查连接</span><br><span class="line">    if ($conn-&gt;connect_error) &#123;</span><br><span class="line">        die(&quot;连接失败: &quot; . $conn-&gt;connect_error);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 抛出连接对象</span><br><span class="line">    return $conn;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>第三步：写查询的方法</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  @table      表名</span><br><span class="line"> *  @key        要查询的列</span><br><span class="line"> *  @limit      限制条件</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">public function query($table, $keys = &apos;*&apos;, $limit = &apos;&apos;) &#123;</span><br><span class="line">    // 先连接数据库</span><br><span class="line">    $conn = $this -&gt; connect();</span><br><span class="line">    </span><br><span class="line">    // 设置字符编码</span><br><span class="line">    $conn -&gt;query(&apos;set names utf8&apos;);</span><br><span class="line">    </span><br><span class="line">    // 根据传入形参拼装 SQL语句</span><br><span class="line">    $sql = &apos;SELECT &apos; . $keys . &apos;FROM &apos; . $table . &apos; &apos; .$limit;</span><br><span class="line">    </span><br><span class="line">    // 执行SQL语句</span><br><span class="line">    $result = $conn-&gt;query($sql);</span><br><span class="line">    </span><br><span class="line">    // 关闭连接</span><br><span class="line">    $conn-&gt;close();</span><br><span class="line">    </span><br><span class="line">    // 如果查到的条数大于0 </span><br><span class="line">    if ($result-&gt;num_rows &gt; 0) &#123;</span><br><span class="line">        // 拼装完整数据</span><br><span class="line">        while($row = $result-&gt;fetch_assoc()) &#123;</span><br><span class="line">            $rows[] = $row;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        抛出数据</span><br><span class="line">        return $rows;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 如果查到条数为 0，则抛出空数组</span><br><span class="line">    return array();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>第四步：写插入的方法</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">  /**</span><br><span class="line">    *   @table      表名</span><br><span class="line">    *   @rows       键组成的字符串</span><br><span class="line">    *   @vals       值组成的字符串</span><br><span class="line">    */</span><br><span class="line">  public function insert($table, $rows, $vals) &#123;</span><br><span class="line">      // 先连接数据库</span><br><span class="line">      $conn = $this -&gt; connect();</span><br><span class="line">      </span><br><span class="line">      // 设置字符编码</span><br><span class="line">      $conn -&gt; query(&apos;set names utf8&apos;);</span><br><span class="line">      </span><br><span class="line">      // 拼装SQL语句，注意要用引号把中文括起来</span><br><span class="line">      $sql = &quot;INSERT INTO &quot; . $table . &quot; (&quot; . $rows . &quot;) VALUES (&quot; . $vals . &quot;) &quot;;</span><br><span class="line">      </span><br><span class="line">      // 执行SQL语句</span><br><span class="line">      $result = $conn -&gt; query($sql);</span><br><span class="line">      </span><br><span class="line">      // $result 返回值为 true/插入成功  false/插入失败</span><br><span class="line">      return $result;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><blockquote>
+<p>封装完成了，来试着实例化调用一下吧</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    require &apos;mysql.php&apos;;    // 引入mysql类</span><br><span class="line">      </span><br><span class="line">    $mysql = new Mysql;     // 实例化</span><br><span class="line">    $data = array();	    //准备返回数据</span><br><span class="line">    </span><br><span class="line">    if($_SERVER[&apos;REQUEST_METHOD&apos;] == &quot;POST&quot;) &#123;     // post请求  插入表</span><br><span class="line">        // 解析请求数据</span><br><span class="line">        $postData = json_decode($GLOBALS[&apos;HTTP_RAW_POST_DATA&apos;], true);</span><br><span class="line">        </span><br><span class="line">        $table = $postData[&apos;table&apos;];	// 表名</span><br><span class="line">        if($table == &apos;applyLists&apos;) &#123;    </span><br><span class="line">            $meetType = $postData[&apos;meetType&apos;];	// 会议室类型</span><br><span class="line">            $date = $postData[&apos;date&apos;];	// 预定的日期 yyyymmdd</span><br><span class="line">            $start = $postData[&apos;start&apos;];	// 开始的时间 hh:mm</span><br><span class="line">            $end = $postData[&apos;end&apos;];	// 结束的时间 hh:mm</span><br><span class="line">            $applyMan = $postData[&apos;applyMan&apos;]; 	// 申请人</span><br><span class="line">            $status = $postData[&apos;status&apos;];	// 申请状态   1/审核中   2/审核通过   3/审核拒绝</span><br><span class="line">            $reason = $postData[&apos;reason&apos;];	// 申请原因</span><br><span class="line">            $time = $postData[&apos;time&apos;];	// 提交申请的详细时间 yyyy/mm/dd/hh/mm/ss</span><br><span class="line"></span><br><span class="line">            $rows = &apos;meetType, date, start, end, applyMan, status, reason, time&apos;;</span><br><span class="line">            $vals = &quot;&quot; . $meetType . &quot;, &apos;&quot; . $date . &quot;&apos;, &apos;&quot;  . $start . &quot;&apos;, &apos;&quot; . $end . &quot;&apos;, &apos;&quot; . $applyMan . &quot;&apos;, &apos;&quot; . $status . &quot;&apos;, &apos;&quot; . $reason . &quot;&apos;, &apos;&quot; . $time . &quot;&apos;&quot;;</span><br><span class="line">  </span><br><span class="line">            $data = $mysql -&gt; insert($table, $rows, $vals);</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">    &#125; else &#123; </span><br><span class="line">        $data = $mysql -&gt; query(&apos;applyLists&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    //返回数据</span><br><span class="line">    echo json_encode($data);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/PHP/">PHP</a>|<a class="cat-link" href="/categories/PHP/Mysql/">Mysql</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/PHP/" title="PHP">PHP</a> / 
+    
+        <a href="/tags/Mysql/" title="Mysql">Mysql</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/2018/05/01/hello-world/">
+            
+                Hello World
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="javascript: void(0);">没有下一篇了</a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    <!--
+    <div class="sign-bar">
+      GitHub 已登录!
+      <span class="sign-link">登出</span>
+    </div>
+    <section class="box">
+      <div class="com-avatar"><img src="/img/jelon.jpg" alt="avatar"></div>
+      <div class="com-text">
+        <div class="main">
+          <textarea class="text-area-edited show" placeholder="欢迎评论！"></textarea>
+          <div class="text-area-preview"></div>
+        </div>
+        <div class="switch">
+          <div class="switch-item on">编辑</div>
+          <div class="switch-item">预览</div>
+        </div>
+        <div class="button">提交</div>
+      </div>
+    </section>
+    <section class="tips">注：评论支持 markdown 语法！</section>
+    <section class="list-wrap">
+      <ul class="list">
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">张德龙</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like liked">已赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">333333</div>
+          </div>
+        </li>
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">刘德华</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like">点赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">vvvvv</div>
+          </div>
+        </li>
+      </ul>
+      <div class="page-nav">
+        <a href="javascript: void(0);" class="item">1</a>
+        <a href="javascript: void(0);" class="item">2</a>
+        <a href="javascript: void(0);" class="item current">3</a>
+      </div>
+    </section>
+    -->
+  </div>
+  <script>
+  JELON.Comment({
+    container: 'comments',
+    label: 'php-connect-mysql' || '2017/04/17/php-connect-mysql/',
+    owner: 'jangdelong',
+    repo: 'blog_comments',
+    clientId: 'b08ed25e52c57993e69c',
+    clientSecret: '1cb9545488f0380904b87350e7c5a270ae03bab7'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/web技术/">web技术</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/心得交流/">心得交流</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/PHP/">PHP</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/PHP/Mysql/">Mysql</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Javascript/" title="Javascript">Javascript (1)</a>
+  
+    <a class="tag-item" href="/tags/PHP/" title="PHP">PHP (1)</a>
+  
+    <a class="tag-item" href="/tags/Mysql/" title="Mysql">Mysql (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.sina.com.cn/u/1825875765" target="_blank" title="网络安全博客">Haoren博客</a>
+        </li>
+    
+        <li>
+            <a href="http://blog.csdn.net/yeweiouyang" target="_blank" title="技术博客">Maxwell博客</a>
+        </li>
+    
+        <li>
+            <a href="http://xuanzh.cc/" target="_blank" title="技术博客">朱旋个人博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2018
+    
+
+    <a href="/">爱生活 爱自己</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>
+</html>
