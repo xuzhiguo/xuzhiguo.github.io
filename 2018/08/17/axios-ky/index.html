@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
     <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
     
-    <title>Hello World | Hexo</title>
+    <title>axios 解决跨域问题 | Hexo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
     <meta name="keywords" content="前端, Web, 徐枝国, 前端开发" >
     <meta name="description" content="徐枝国个人前端小站" >
@@ -56,19 +56,19 @@
         <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
         <ul class="menu hidden" id="JELON__menu">
             
-            <li rel="/2018/05/01/hello-world/index.html" class="item ">
+            <li rel="/2018/08/17/axios-ky/index.html" class="item ">
                 <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
             </li>
             
-            <li rel="/2018/05/01/hello-world/index.html" class="item ">
+            <li rel="/2018/08/17/axios-ky/index.html" class="item ">
                 <a href="/lab/" title="实验室" class="icon-lab">&nbsp;实验室</a>
             </li>
             
-            <li rel="/2018/05/01/hello-world/index.html" class="item ">
+            <li rel="/2018/08/17/axios-ky/index.html" class="item ">
                 <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
             </li>
             
-            <li rel="/2018/05/01/hello-world/index.html" class="item ">
+            <li rel="/2018/08/17/axios-ky/index.html" class="item ">
                 <a href="/comment/" title="留言" class="icon-comment">&nbsp;留言</a>
             </li>
             
@@ -120,23 +120,41 @@
 <!-- 文章 -->
 <article class="post article">
     <header class="text-center">
-        <h3 class="post-title"><span>Hello World</span></h3>
+        <h3 class="post-title"><span>axios 解决跨域问题</span></h3>
     </header>
     <p class="post-meta text-center">
         xuzg 发表于
-        <time datetime="2018-04-30T16:00:00.000Z">2018-05-01</time>
+        <time datetime="2018-08-17T10:18:30.102Z">2018-08-17</time>
     </p>
     <div class="post-content">
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>跨域这种问题呢，基本你进行HTTP请求都会遇到。为什么会跨域？对于浏览器而言只要 <strong>域名</strong> 、 <strong>协议</strong> 、 <strong>端口</strong> 其中一个不同就会引发同源策略。本文主要是针对 <strong>开发环境</strong> 的跨域问题，即你在本地开发的过程中想调外网的接口。废话不多说，那就开始吧…</p>
+<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><blockquote>
+<p>1、首先打开 config/index.js 文件，找到 proxyTable，按照下面格式修改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">proxyTable: &#123;</span><br><span class="line">    &apos;/api/*&apos;: &#123;</span><br><span class="line">        target: &apos;http://1.xxxx.applinzi.com/myApi&apos;,  // 地址的根路径</span><br><span class="line">        secure: false,</span><br><span class="line">        changeOrigin: true, // 是否允许跨域</span><br><span class="line">        pathRewrite: &#123;</span><br><span class="line">          &apos;^/api&apos;: &apos;&apos; //这里理解成用 /api 代替target里面的地址，后面组件中我们掉接口时直接用api代替</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<hr>
+<blockquote>
+<p>2、打开 http/index.js 文件，更改axios实例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const axiosInstance = axios.create(&#123;</span><br><span class="line">	baseURL: &apos;/api&apos;,    // 这里的 /api 和上面的对应</span><br><span class="line">	timeout: 1000</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>tips：如果你不懂这里的实例，那就看一下这篇 <a href="/2017/09/16/axios/">axios 的使用</a> 文章吧。</p>
+<hr>
+<blockquote>
+<p>3、页面调接口和之前一样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import http from &apos;../http/index&apos;;</span><br><span class="line"></span><br><span class="line">http.get(&apos;/xxxxx.php&apos;)</span><br><span class="line">    .then((res) =&gt; &#123;    // 成功回调</span><br><span class="line">        console.log(res);</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch((err) =&gt; &#123;   // 失败回调</span><br><span class="line">        console.log(err);</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure></p>
+</blockquote>
 
     </div>
     <p class="post-meta">
         <span class="post-cat">分类：
-            <a class="cat-link" href="/categories/web技术/">web技术</a>
+            <a class="cat-link" href="/categories/技术交流/">技术交流</a>
         </span>
         <span class="post-tags">
             标签：
             
+    
+        <a href="/tags/vue/" title="vue">vue</a> / 
+    
+        <a href="/tags/HTTP/" title="HTTP">HTTP</a>
+    
+
         </span>
     </p>
 </article>
@@ -160,9 +178,9 @@
     
     <span class="prev fl">
         上一篇<br >
-        <a href="/2018/08/16/a/">
+        <a href="/2018/08/20/vux/">
             
-                文章标题
+                vux 入门
             
         </a>
     </span>
@@ -171,9 +189,9 @@
     
     <span class="next fr">
         下一篇<br >
-        <a href="/2017/04/17/php-connect-mysql/">
+        <a href="/2018/03/02/wewin-dyh1/">
             
-                php 连接 mysql 操纵数据库
+                微信订阅号体验（一）
             
         </a>
     </span>
@@ -250,7 +268,7 @@
   <script>
   JELON.Comment({
     container: 'comments',
-    label: 'hello-world' || '2018/05/01/hello-world/',
+    label: 'axios-ky' || '2018/08/17/axios-ky/',
     owner: 'jangdelong',
     repo: 'blog_comments',
     clientId: 'b08ed25e52c57993e69c',
@@ -270,22 +288,12 @@
 <ul class="widget-bd">
     
     <li>
-        <a href="/categories/心得交流/">心得交流</a>
-        <span class="badge">(1)</span>
+        <a href="/categories/技术交流/">技术交流</a>
+        <span class="badge">(6)</span>
     </li>
     
     <li>
-        <a href="/categories/web技术/">web技术</a>
-        <span class="badge">(1)</span>
-    </li>
-    
-    <li>
-        <a href="/categories/PHP/">PHP</a>
-        <span class="badge">(1)</span>
-    </li>
-    
-    <li>
-        <a href="/categories/PHP/Mysql/">Mysql</a>
+        <a href="/categories/生活琐事/">生活琐事</a>
         <span class="badge">(1)</span>
     </li>
     
@@ -298,11 +306,19 @@
         <!-- 文章标签 -->
 <div class="widget-bd tag-wrap">
   
-    <a class="tag-item" href="/tags/Javascript/" title="Javascript">Javascript (1)</a>
+    <a class="tag-item" href="/tags/vue/" title="vue">vue (3)</a>
   
-    <a class="tag-item" href="/tags/PHP/" title="PHP">PHP (1)</a>
+    <a class="tag-item" href="/tags/HTTP/" title="HTTP">HTTP (2)</a>
+  
+    <a class="tag-item" href="/tags/PHP/" title="PHP">PHP (3)</a>
   
     <a class="tag-item" href="/tags/Mysql/" title="Mysql">Mysql (1)</a>
+  
+    <a class="tag-item" href="/tags/微信订阅号/" title="微信订阅号">微信订阅号 (1)</a>
+  
+    <a class="tag-item" href="/tags/非技术向/" title="非技术向">非技术向 (1)</a>
+  
+    <a class="tag-item" href="/tags/样式库/" title="样式库">样式库 (1)</a>
   
 </div>
     </section>

@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
+    
+    <title>vux 入门 | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
+    <meta name="keywords" content="前端, Web, 徐枝国, 前端开发" >
+    <meta name="description" content="徐枝国个人前端小站" >
+
+    
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml" >
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico" >
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</head>
+
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">Hexo</span>
+                    <span class="description">个人前端小站</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2018/08/20/vux/index.html" class="item ">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2018/08/20/vux/index.html" class="item ">
+                <a href="/lab/" title="实验室" class="icon-lab">&nbsp;实验室</a>
+            </li>
+            
+            <li rel="/2018/08/20/vux/index.html" class="item ">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2018/08/20/vux/index.html" class="item ">
+                <a href="/comment/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        徐枝国
+                        |
+                    
+                        WEB 前端开发工程师
+                        |
+                    
+                        17620136588
+                        
+                    
+                </p>
+                <p class="sns">
+                    
+                        <a href="https://github.com/xuzhiguo" class="qqweibo" target="_blank"><b>■</b> github</a>
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        微信号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/jelon.jpg" alt="avatar" title="头像" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>vux 入门</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        xuzg 发表于
+        <time datetime="2018-08-20T01:20:25.821Z">2018-08-20</time>
+    </p>
+    <div class="post-content">
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>VUX 是基于WeUI和Vue(2.x)开发的移动端UI组件库，主要服务于微信页面。这是官网描述，从描述中可以知道几点：首先这是一个移动的端UI组件库，PC端的话pass掉吧。其次基于vue，那你肯定需要vue的基础了，那就开始吧。<br>tips：你也可以先去官网看看 –&gt; <a href="https://doc.vux.li/zh-CN" target="_blank" rel="noopener">点这里</a>;</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><blockquote>
+<p>1、在项目根目录打开命令行，用 npm 或 cnpm 安装 vux<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install vux --save</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>2、安装 <strong>vux-loader</strong>，安装这个并不是用它完全替代 <strong>vue-loader</strong>，它俩是配合使用的，后面你要使用一些插件，所以必须要安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install vux-loader --save-dev</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>3、安装 <strong>less</strong> 和 <strong>less-loader</strong>，安装这俩是为了后面我们自定义一些组件的属性用的，装上装上~<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm install less --save-dev </span><br><span class="line"></span><br><span class="line">$ npm install less-loader --save-dev</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>4、看一下我们的 package.json<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  你安装时 --save 会把依赖添加到 dependencies 中，代表无论开发还是生产都需要的</span><br><span class="line"> */</span><br><span class="line">&quot;dependencies&quot;: &#123;</span><br><span class="line">  &quot;axios&quot;: &quot;^0.17.1&quot;,</span><br><span class="line">  &quot;fastclick&quot;: &quot;^1.0.6&quot;,</span><br><span class="line">  &quot;vue&quot;: &quot;^2.5.2&quot;,</span><br><span class="line">  &quot;vue-router&quot;: &quot;^3.0.1&quot;,</span><br><span class="line">  &quot;vuex&quot;: &quot;^2.1.1&quot;,</span><br><span class="line">  &quot;vuex-i18n&quot;: &quot;^1.3.1&quot;,</span><br><span class="line">  &quot;vux&quot;: &quot;^2.2.0&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**  </span><br><span class="line"> *  另外 vue-loader 应该会在 devDependencies 中，这里面的依赖是仅开发中需要</span><br><span class="line"> *  你可以通过安装时后面加上 --save-dev 来把依赖保存在这里</span><br><span class="line"> */</span><br><span class="line">&quot;devDependencies&quot;: &#123;</span><br><span class="line">  &quot;vux-loader&quot;: &quot;^1.0.56&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<hr>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><blockquote>
+<p>1、找到 build/webpack.base.conf.js，增加配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const vueLoaderConfig = require(&apos;./vue-loader.conf&apos;) // 这是原来 vue-loader 的配置</span><br><span class="line">const vuxLoader = require(&apos;vux-loader&apos;)</span><br><span class="line"></span><br><span class="line">// 增加以下</span><br><span class="line">module.exports = vuxLoader.merge(webpackConfig, &#123;</span><br><span class="line">  plugins: [&#123;</span><br><span class="line">    name: &apos;vux-ui&apos;</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    name: &apos;duplicate-style&apos;</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>tips：<strong>duplicate-style</strong> 插件是用来清除 css 重复代码的，建议还是加上吧。</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>一切准备就绪，那就可以开始使用了~</p>
+<blockquote>
+<p>先定个小目标，做个按钮<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// template 部分</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;x-button type=&quot;default&quot; @click.native=&quot;sayHi&quot;&gt;&#123;&#123;text&#125;&#125;&lt;/x-button&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">// script 部分</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  import &#123; XButton &#125; from &apos;vux&apos;; // 引入指定组件</span><br><span class="line"></span><br><span class="line">  export default &#123;</span><br><span class="line">    components: &#123;</span><br><span class="line">      XButton         // 注册一下</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      sayHi() &#123;</span><br><span class="line">        alert(&quot;hi!&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    data () &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        text: &apos;hello world!&apos;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>tips：上面我们给按钮指定了类型为 default，还绑定了点击事件，这些东西都是vux里面定义的。建议你使用时，请多看看<a href="https://doc.vux.li/zh-CN/components/actionsheet.html" target="_blank" rel="noopener">官方网档</a></p>
+<h3 id="结合官方文档，讲一下组件中属性、事件、样式变量的使用"><a href="#结合官方文档，讲一下组件中属性、事件、样式变量的使用" class="headerlink" title="结合官方文档，讲一下组件中属性、事件、样式变量的使用"></a>结合官方文档，讲一下组件中属性、事件、样式变量的使用</h3><blockquote>
+<p>属性</p>
+</blockquote>
+<p>这里以 <strong>XButton</strong> 为例</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名字</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">默认值</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">type</td>
+<td style="text-align:center">string</td>
+<td style="text-align:center">default</td>
+<td style="text-align:left">按钮类型，可选值为 default,primary,warn</td>
+</tr>
+<tr>
+<td style="text-align:left">mini</td>
+<td style="text-align:center">boolean</td>
+<td style="text-align:center">false</td>
+<td style="text-align:left">是否为mini类型，即小尺寸的按钮</td>
+</tr>
+<tr>
+<td style="text-align:left">text</td>
+<td style="text-align:center">string</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">按钮文字，同默认slot</td>
+</tr>
+<tr>
+<td style="text-align:left">action-type</td>
+<td style="text-align:center">string</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">button的type属性，默认为浏览器默认(submit)，可选为 submit button reset</td>
+</tr>
+<tr>
+<td style="text-align:left">link</td>
+<td style="text-align:center">string</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">vue-router 路由, 值为 BACK 等同于 go(-1)</td>
+</tr>
+</tbody>
+</table>
+<p>…</p>
+<p>属性的使用一般就直接把名字写在组件中，在指定你想要的值就可以了</p>
+<blockquote>
+<p>事件</p>
+</blockquote>
+<p>这里以 <strong>XHeader</strong> 为例</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名字</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">@on-click-more</td>
+<td style="text-align:left">点击右侧更多时触发</td>
+</tr>
+<tr>
+<td style="text-align:left">@on-click-back</td>
+<td style="text-align:left">当left-options.preventGoBack为true,点击左边返回时触发</td>
+</tr>
+<tr>
+<td style="text-align:left">@on-click-title</td>
+<td style="text-align:left">点击标题时触发</td>
+</tr>
+</tbody>
+</table>
+<p>事件的使用也很简单，和 vue 一样，例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// moreFn、backFn、titleFn 为你在 methods 中声明的方法</span><br><span class="line">&lt;x-header :left-options=&quot;leftOptions&quot; :right-options=&quot;rightOptions&quot; :title=&quot;title&quot;</span><br><span class="line">  @on-click-more=&quot;moreFn&quot; @on-click-back=&quot;backFn&quot; @on-click-title=&quot;titleFn&quot; &gt;&lt;/x-header&gt;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>样式变量</p>
+</blockquote>
+<p>这个相比上面两个有些麻烦，不过会用以后会很方便，如果你已执行了上面按照和配置的步骤的话，那 <strong>less</strong> 和 <strong>less-loader</strong> 应该已经装好了。那只需配置一下就行了。</p>
+<ol>
+<li>首先在 assets 文件下新建个 styles 文件夹，然后在这个文件夹里新建个 <strong>theme.less</strong> 文件</li>
+<li><p>我们之前在 build/webpack.base.conf.js 中增加 vux 的配置，现在要在里面使用 <strong>less-theme</strong> 这个插件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">module.exports = vuxLoader.merge(webpackConfig, &#123;</span><br><span class="line">  plugins: [&#123;</span><br><span class="line">    name: &apos;vux-ui&apos;</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    name: &apos;duplicate-style&apos;</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    name: &apos;less-theme&apos;,                 // 增加这个插件</span><br><span class="line">    path: &apos;src/styles/theme.less&apos;       // 引入之前我们定义的那个less文件</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这里以 <strong>XHeader</strong> 为例，自定义我们的主题</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名字</th>
+<th style="text-align:center">默认值</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">@header-background-color</td>
+<td style="text-align:center">#35495e</td>
+<td style="text-align:left">背景颜色</td>
+</tr>
+<tr>
+<td style="text-align:left">@header-title-color</td>
+<td style="text-align:center">#fff</td>
+<td style="text-align:left">标题文字颜色</td>
+</tr>
+<tr>
+<td style="text-align:left">@header-text-color</td>
+<td style="text-align:center">#ccc</td>
+<td style="text-align:left">背景颜色</td>
+</tr>
+<tr>
+<td style="text-align:left">@header-arrow-color</td>
+<td style="text-align:center">#ccc</td>
+<td style="text-align:left">背景颜色</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/技术交流/">技术交流</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/vue/" title="vue">vue</a> / 
+    
+        <a href="/tags/样式库/" title="样式库">样式库</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="javascript: void(0);">没有上一篇了</a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2018/08/17/axios-ky/">
+            
+                axios 解决跨域问题
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    <!--
+    <div class="sign-bar">
+      GitHub 已登录!
+      <span class="sign-link">登出</span>
+    </div>
+    <section class="box">
+      <div class="com-avatar"><img src="/img/jelon.jpg" alt="avatar"></div>
+      <div class="com-text">
+        <div class="main">
+          <textarea class="text-area-edited show" placeholder="欢迎评论！"></textarea>
+          <div class="text-area-preview"></div>
+        </div>
+        <div class="switch">
+          <div class="switch-item on">编辑</div>
+          <div class="switch-item">预览</div>
+        </div>
+        <div class="button">提交</div>
+      </div>
+    </section>
+    <section class="tips">注：评论支持 markdown 语法！</section>
+    <section class="list-wrap">
+      <ul class="list">
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">张德龙</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like liked">已赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">333333</div>
+          </div>
+        </li>
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">刘德华</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like">点赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">vvvvv</div>
+          </div>
+        </li>
+      </ul>
+      <div class="page-nav">
+        <a href="javascript: void(0);" class="item">1</a>
+        <a href="javascript: void(0);" class="item">2</a>
+        <a href="javascript: void(0);" class="item current">3</a>
+      </div>
+    </section>
+    -->
+  </div>
+  <script>
+  JELON.Comment({
+    container: 'comments',
+    label: 'vux' || '2018/08/20/vux/',
+    owner: 'jangdelong',
+    repo: 'blog_comments',
+    clientId: 'b08ed25e52c57993e69c',
+    clientSecret: '1cb9545488f0380904b87350e7c5a270ae03bab7'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/技术交流/">技术交流</a>
+        <span class="badge">(6)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/生活琐事/">生活琐事</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/vue/" title="vue">vue (3)</a>
+  
+    <a class="tag-item" href="/tags/HTTP/" title="HTTP">HTTP (2)</a>
+  
+    <a class="tag-item" href="/tags/PHP/" title="PHP">PHP (3)</a>
+  
+    <a class="tag-item" href="/tags/Mysql/" title="Mysql">Mysql (1)</a>
+  
+    <a class="tag-item" href="/tags/微信订阅号/" title="微信订阅号">微信订阅号 (1)</a>
+  
+    <a class="tag-item" href="/tags/非技术向/" title="非技术向">非技术向 (1)</a>
+  
+    <a class="tag-item" href="/tags/样式库/" title="样式库">样式库 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.sina.com.cn/u/1825875765" target="_blank" title="网络安全博客">Haoren博客</a>
+        </li>
+    
+        <li>
+            <a href="http://blog.csdn.net/yeweiouyang" target="_blank" title="技术博客">Maxwell博客</a>
+        </li>
+    
+        <li>
+            <a href="http://xuanzh.cc/" target="_blank" title="技术博客">朱旋个人博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2018
+    
+
+    <a href="/">爱生活 爱自己</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>
+</html>

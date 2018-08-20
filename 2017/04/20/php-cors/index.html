@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
     <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
     
-    <title>留言 | Hexo</title>
+    <title>php 服务端 设置跨域 CORS | Hexo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
     <meta name="keywords" content="前端, Web, 徐枝国, 前端开发" >
     <meta name="description" content="徐枝国个人前端小站" >
@@ -56,19 +56,19 @@
         <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
         <ul class="menu hidden" id="JELON__menu">
             
-            <li rel="/comment/index.html" class="item ">
+            <li rel="/2017/04/20/php-cors/index.html" class="item ">
                 <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
             </li>
             
-            <li rel="/comment/index.html" class="item ">
+            <li rel="/2017/04/20/php-cors/index.html" class="item ">
                 <a href="/lab/" title="实验室" class="icon-lab">&nbsp;实验室</a>
             </li>
             
-            <li rel="/comment/index.html" class="item ">
+            <li rel="/2017/04/20/php-cors/index.html" class="item ">
                 <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
             </li>
             
-            <li rel="/comment/index.html" class="item current">
+            <li rel="/2017/04/20/php-cors/index.html" class="item ">
                 <a href="/comment/" title="留言" class="icon-comment">&nbsp;留言</a>
             </li>
             
@@ -116,24 +116,86 @@
     <div class="container body clearfix">
         <section class="content">
             <div class="content-main widget">
-                <!-- 独立页面 -->
+                <!-- 文章页 -->
+<!-- 文章 -->
 <article class="post article">
     <header class="text-center">
-        <h4 class="post-title"><a href="javascript: void(0);">留言</a></h4>
+        <h3 class="post-title"><span>php 服务端 设置跨域 CORS</span></h3>
     </header>
+    <p class="post-meta text-center">
+        xuzg 发表于
+        <time datetime="2017-04-19T16:00:00.000Z">2017-04-20</time>
+    </p>
     <div class="post-content">
-        
-            <!-- 自定义留言页 -->
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>为什么会产生跨域问题呢？这是由于浏览器为了保证用户信息的安全，防止恶意的网站窃取数据，故禁止不同域之间的JS进行交互。对于浏览器而言只要<strong>域名</strong>、<strong>协议</strong>、<strong>端口</strong>其中一个不同就会引发同源策略，所以我们在做前端开发的时候无所避免地会遇到跨域的问题。解决跨域的方法当然不局限于一种，客户端解决或服务器端解决都行，本文介绍的是从服务端解决的方式。</p>
+<h3 id="允许所有域名访问"><a href="#允许所有域名访问" class="headerlink" title="允许所有域名访问"></a>允许所有域名访问</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">header(&apos;Access-Control-Allow-Origin: *&apos;);</span><br></pre></td></tr></table></figure>
+<h3 id="允许一个域名访问"><a href="#允许一个域名访问" class="headerlink" title="允许一个域名访问"></a>允许一个域名访问</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">header(&apos;Access-Control-Allow-Origin: http://baidu.com&apos;);</span><br></pre></td></tr></table></figure>
+<h3 id="允许多个域名访问"><a href="#允许多个域名访问" class="headerlink" title="允许多个域名访问"></a>允许多个域名访问</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$origin = isset($_SERVER[&apos;HTTP_ORIGIN&apos;])? $_SERVER[&apos;HTTP_ORIGIN&apos;] : &apos;&apos;;  </span><br><span class="line"></span><br><span class="line">$allow_origin = array(  </span><br><span class="line">    &apos;http://baidu.com&apos;,  </span><br><span class="line">    &apos;http://xuzg.com&apos;  </span><br><span class="line">);  </span><br><span class="line">  </span><br><span class="line">if(in_array($origin, $allow_origin))&#123;  </span><br><span class="line">    header(&apos;Access-Control-Allow-Origin:&apos;.$origin);       </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h3><blockquote>
+<p>有一次我改动了PHP文件，然后再访问就提示了这个错误 <strong>Warning: Cannot modify header information - headers already sent by …</strong></p>
+</blockquote>
+<ul>
+<li>原因：空白行导致的问题</li>
+<li>解决方法：检查有&lt;?php … ?&gt; 后面没有空白行，特别是include或者require的文件。不少问题是这些空白行导致的。</li>
+</ul>
 
-<p class="text-center">
-  <img style="width: 258px; height: 258px; border: 1px solid #eee; padding: 0; border-radius: 3px;" src="/img/wechat_pay.png">
-</p>
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/技术交流/">技术交流</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/PHP/" title="PHP">PHP</a>
+    
 
-<p class="text-center">
-  如果觉得博客对您有用，欢迎微信赞赏
-</p>
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
 
-  
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/2017/09/16/axios/">
+            
+                axios 的使用
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2017/04/17/php-connect-mysql/">
+            
+                php 连接 mysql 操纵数据库
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
   <script src="/js/comment.js"></script>
   <div id="comments" class="comment">
     <!--
@@ -202,7 +264,7 @@
   <script>
   JELON.Comment({
     container: 'comments',
-    label: '' || 'comment/index.html',
+    label: 'php-cors' || '2017/04/20/php-cors/',
     owner: 'jangdelong',
     repo: 'blog_comments',
     clientId: 'b08ed25e52c57993e69c',
@@ -211,11 +273,6 @@
   </script>
 
 
-
-
-        
-    </div>
-</article>
             </div>
 
         </section>
