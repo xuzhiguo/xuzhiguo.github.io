@@ -234,7 +234,7 @@
 <li><p>我们之前在 build/webpack.base.conf.js 中增加 vux 的配置，现在要在里面使用 <strong>less-theme</strong> 这个插件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">module.exports = vuxLoader.merge(webpackConfig, &#123;</span><br><span class="line">  plugins: [&#123;</span><br><span class="line">    name: &apos;vux-ui&apos;</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    name: &apos;duplicate-style&apos;</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    name: &apos;less-theme&apos;,                 // 增加这个插件</span><br><span class="line">    path: &apos;src/styles/theme.less&apos;       // 引入之前我们定义的那个less文件</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>这里以 <strong>XHeader</strong> 为例，自定义我们的主题</p>
+<li><p>这里以 <strong>XButton</strong> 为例，自定义我们的主题</p>
 </li>
 </ol>
 <table>
@@ -247,27 +247,56 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">@header-background-color</td>
-<td style="text-align:center">#35495e</td>
-<td style="text-align:left">背景颜色</td>
+<td style="text-align:left">@button-global-border-radius</td>
+<td style="text-align:center">5px</td>
+<td style="text-align:left">圆角边框</td>
 </tr>
 <tr>
-<td style="text-align:left">@header-title-color</td>
-<td style="text-align:center">#fff</td>
-<td style="text-align:left">标题文字颜色</td>
+<td style="text-align:left">@button-global-font-color</td>
+<td style="text-align:center">#FFFFFF</td>
+<td style="text-align:left">字体颜色</td>
 </tr>
 <tr>
-<td style="text-align:left">@header-text-color</td>
-<td style="text-align:center">#ccc</td>
-<td style="text-align:left">背景颜色</td>
+<td style="text-align:left">@button-global-margin-top</td>
+<td style="text-align:center">15px</td>
+<td style="text-align:left">与相邻按钮的 margin-top 间隙，只有一个按钮时不生效</td>
 </tr>
 <tr>
-<td style="text-align:left">@header-arrow-color</td>
-<td style="text-align:center">#ccc</td>
-<td style="text-align:left">背景颜色</td>
+<td style="text-align:left">@button-global-height</td>
+<td style="text-align:center">42px</td>
+<td style="text-align:left">按钮高度</td>
+</tr>
+<tr>
+<td style="text-align:left">@button-default-bg-color</td>
+<td style="text-align:center">#F8F8F8</td>
+<td style="text-align:left">default类型的背景颜色</td>
+</tr>
+<tr>
+<td style="text-align:left">@button-default-font-color</td>
+<td style="text-align:center">#000000</td>
+<td style="text-align:left">default类型的字体颜色</td>
+</tr>
+<tr>
+<td style="text-align:left">@button-default-active-bg-color</td>
+<td style="text-align:center">#DEDEDE</td>
+<td style="text-align:left">active状态下，default类型的背景颜色</td>
+</tr>
+<tr>
+<td style="text-align:left">@button-default-disabled-font-color</td>
+<td style="text-align:center">rgba(0,0,0,.3)</td>
+<td style="text-align:left">disabled状态下，default类型的字体颜色</td>
+</tr>
+<tr>
+<td style="text-align:left">@button-default-disabled-bg-color</td>
+<td style="text-align:center">#F7F7F7</td>
+<td style="text-align:left">disabled状态下，default类型的背景颜色</td>
 </tr>
 </tbody>
 </table>
+<p>太多了就不列举完了，详情请看官网…</p>
+<p>以上为官网给的样式变量，下面我们来覆盖它的默认值。在之前新建的 <strong>theme.less</strong> 文件中编写如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@import &apos;variable.less&apos;;</span><br><span class="line"></span><br><span class="line">// @main-color 的值为 #1E90FF</span><br><span class="line">@button-default-bg-color: @main-color;</span><br><span class="line">@button-default-font-color: #fff;</span><br><span class="line">@button-default-active-bg-color: @main-color + #111;</span><br><span class="line">@button-default-active-font-color: #fff;</span><br><span class="line">@button-default-disabled-font-color: #fff;</span><br><span class="line">@button-default-disabled-bg-color: #999;</span><br></pre></td></tr></table></figure></p>
+<p>使用样式变量的好处就是你可以统一管理你页面上的组件，比如说想换按钮的背景色，我只需把 <strong>@main-color</strong> 的值换一下就行了</p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>首先很感谢你看了我的文章，文章只是一种技术交流的方式，仅供参考。这些都是个人参考文档学习总结出来的，也许会有些地方会有错误，欢迎大家指出 ~~</p>
 
     </div>
     <p class="post-meta">
@@ -434,13 +463,13 @@
   
     <a class="tag-item" href="/tags/HTTP/" title="HTTP">HTTP (2)</a>
   
+    <a class="tag-item" href="/tags/非技术向/" title="非技术向">非技术向 (1)</a>
+  
     <a class="tag-item" href="/tags/PHP/" title="PHP">PHP (3)</a>
   
     <a class="tag-item" href="/tags/Mysql/" title="Mysql">Mysql (1)</a>
   
     <a class="tag-item" href="/tags/微信订阅号/" title="微信订阅号">微信订阅号 (1)</a>
-  
-    <a class="tag-item" href="/tags/非技术向/" title="非技术向">非技术向 (1)</a>
   
     <a class="tag-item" href="/tags/样式库/" title="样式库">样式库 (1)</a>
   
