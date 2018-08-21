@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
+    
+    <title>git 入门 | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
+    <meta name="keywords" content="前端, Web, 徐枝国, 前端开发" >
+    <meta name="description" content="徐枝国个人前端小站" >
+
+    
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml" >
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico" >
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</head>
+
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">Hexo</span>
+                    <span class="description">个人前端小站</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2017/06/24/git/index.html" class="item ">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2017/06/24/git/index.html" class="item ">
+                <a href="/lab/" title="实验室" class="icon-lab">&nbsp;实验室</a>
+            </li>
+            
+            <li rel="/2017/06/24/git/index.html" class="item ">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2017/06/24/git/index.html" class="item ">
+                <a href="/comment/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        徐枝国
+                        |
+                    
+                        WEB 前端开发工程师
+                        |
+                    
+                        17620136588
+                        
+                    
+                </p>
+                <p class="sns">
+                    
+                        <a href="https://github.com/xuzhiguo" class="qqweibo" target="_blank"><b>■</b> github</a>
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        微信号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/jelon.jpg" alt="avatar" title="头像" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>git 入门</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        xuzg 发表于
+        <time datetime="2017-06-23T16:00:00.000Z">2017-06-24</time>
+    </p>
+    <div class="post-content">
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>github是一个面向开源及私有软件项目的托管平台。在GitHub，我们既可以免费保存我们的代码，又可以十分轻易地找到海量的开源代码。</p>
+<h3 id="使用之前"><a href="#使用之前" class="headerlink" title="使用之前"></a>使用之前</h3><ol>
+<li>下载</li>
+</ol>
+<p>下载网址为 <a href="https://www.git-scm.com/download/" target="_blank" rel="noopener">https://www.git-scm.com/download/</a></p>
+<ol start="2">
+<li>生成 SSH</li>
+</ol>
+<p>打开命令行，键入 <code>ssh-keygen</code>。执行后会询问你文件存储位置等一系列问题，我都是直接回车，默认就行了。然后会在 <strong>c/Users/xuzg/.ssh</strong> 这个目录下生成一个 <strong>id_rsa.pub</strong> 和 <strong>id_rsa</strong>。</p>
+<ol start="3">
+<li>把你的github账户关联SSH密钥<br>打开你的 github，点头像 -&gt; setting -&gt; SSH and GPG keys -&gt; New SSH key，然后输入title再把 <strong>id_rsa.pub</strong> 中的内容粘贴到 key 中保存就行了。</li>
+</ol>
+<h3 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h3><p>上面把你的git账户和你的电脑关联起来了，现在可以把你的远程仓库和本地项目用起来了。</p>
+<ol>
+<li>首先你可以上github新建一个远程仓库，然后你可以进入你新建的仓库中拿到地址</li>
+<li>在你本地的项目的根目录初始化一个git仓库，打开命令行，键入<code>git init</code>，填写一些信息后，最后会在那个目录生成一个 <strong>.git</strong> 文件夹</li>
+<li><p>右键打开一个git命令行，设置你的用户名和邮箱</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 设置用户名</span><br><span class="line">$ git config --global user.name &lt;用户名&gt;</span><br><span class="line"></span><br><span class="line">// 设置邮箱</span><br><span class="line">$ git config --global user.email &lt;邮箱&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>与你的远程仓库建立连接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote add &lt;remote名字&gt; &lt;远程仓库的地址&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建一个.gitignore文件，这个文件可以让你忽略不必要提交的文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ touch .gitignore</span><br></pre></td></tr></table></figure>
+<p> tips：gitignore忽略文件的一些规则语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 此为注释 – 将被 Git 忽略</span><br><span class="line"> </span><br><span class="line">*.a       # 忽略所有 .a 结尾的文件</span><br><span class="line">!lib.a    # 但 lib.a 除外</span><br><span class="line">/TODO     # 仅仅忽略项目根目录下的 TODO 文件，不包括 subdir/TODO</span><br><span class="line">build/    # 忽略 build/ 目录下的所有文件</span><br><span class="line">doc/*.txt # 会忽略 doc/notes.txt 但不包括 doc/server/arch.txt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加所有修改的文件到版本管理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git add &lt;文件名 / 目录&gt;</span><br><span class="line"></span><br><span class="line">// 如果你嫌一个个添加麻烦，你可以一次性添加全部</span><br><span class="line">$ git add .</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>提交所有添加的文件，加上提交信息。写提交信息是个好习惯，这样别人可以看提交信息知道你这次提交了什么。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit -m &lt;提交信息&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上传代码及快速合并</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push &lt;remote&gt; &lt;branch&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>到这一次完整的流程就走完了~</p>
+<h3 id="常用命令整合"><a href="#常用命令整合" class="headerlink" title="常用命令整合"></a>常用命令整合</h3><blockquote>
+<p>创建版本库</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git clone &lt;url&gt;                  #克隆远程版本库</span><br><span class="line">$ git init                         #初始化本地版本库</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>修改和提交</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ git status                       #查看状态</span><br><span class="line">$ git diff                         #查看变更内容</span><br><span class="line">$ git add .                        #跟踪所有改动过的文件</span><br><span class="line">$ git add &lt;file&gt;                   #跟踪指定的文件</span><br><span class="line">$ git mv &lt;old&gt;&lt;new&gt;                #文件改名</span><br><span class="line">$ git rm&lt;file&gt;                     #删除文件</span><br><span class="line">$ git rm --cached&lt;file&gt;            #停止跟踪文件但不删除</span><br><span class="line">$ git commit -m &quot;commit messages&quot;  #提交所有更新过的文件</span><br><span class="line">$ git commit --amend               #修改最后一次改动</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>查看提交历史</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git log                    #查看提交历史</span><br><span class="line">$ git log -p &lt;file&gt;          #查看指定文件的提交历史</span><br><span class="line">$ git blame &lt;file&gt;           #以列表方式查看指定文件的提交历史</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>撤销</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git reset --hard HEAD      #撤销工作目录中所有未提交文件的修改内容</span><br><span class="line">$ git checkout HEAD &lt;file&gt;   #撤销指定的未提交文件的修改内容</span><br><span class="line">$ git revert &lt;commit&gt;        #撤销指定的提交</span><br><span class="line">$ git log --before=&quot;1 days&quot;  #退回到之前1天的版本</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>分支与标签</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git branch                   #显示所有本地分支</span><br><span class="line">$ git checkout &lt;branch/tag&gt;    #切换到指定分支和标签</span><br><span class="line">$ git branch &lt;new-branch&gt;      #创建新分支</span><br><span class="line">$ git branch -d &lt;branch&gt;       #删除本地分支</span><br><span class="line">$ git tag                      #列出所有本地标签</span><br><span class="line">$ git tag &lt;tagname&gt;            #基于最新提交创建标签</span><br><span class="line">$ git tag -d &lt;tagname&gt;         #删除标签</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>合并与衍合</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git merge &lt;branch&gt;        #合并指定分支到当前分支</span><br><span class="line">$ git rebase &lt;branch&gt;       #衍合指定分支到当前分支</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>远程操作</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git remote -v                   #查看远程版本库信息</span><br><span class="line">$ git remote show &lt;remote&gt;        #查看指定远程版本库信息</span><br><span class="line">$ git remote add &lt;remote&gt; &lt;url&gt;   #添加远程版本库</span><br><span class="line">$ git fetch &lt;remote&gt;              #从远程库获取代码</span><br><span class="line">$ git pull &lt;remote&gt; &lt;branch&gt;      #下载代码及快速合并</span><br><span class="line">$ git push &lt;remote&gt; &lt;branch&gt;      #上传代码及快速合并</span><br><span class="line">$ git push &lt;remote&gt; :&lt;branch/tag-name&gt;  #删除远程分支或标签</span><br><span class="line">$ git push --tags                       #上传所有标签</span><br></pre></td></tr></table></figure>
+<p>tips：更多命令可以查看<a href="https://git-scm.com/book/zh/v2" target="_blank" rel="noopener">Git文档</a></p>
+
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/技术交流/">技术交流</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/git/" title="git">git</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/2017/08/05/horizontal-screen/">
+            
+                用CSS3的 transform 解决移动端横屏问题
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2017/04/20/php-cors/">
+            
+                php 服务端 设置跨域 CORS
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    <!--
+    <div class="sign-bar">
+      GitHub 已登录!
+      <span class="sign-link">登出</span>
+    </div>
+    <section class="box">
+      <div class="com-avatar"><img src="/img/jelon.jpg" alt="avatar"></div>
+      <div class="com-text">
+        <div class="main">
+          <textarea class="text-area-edited show" placeholder="欢迎评论！"></textarea>
+          <div class="text-area-preview"></div>
+        </div>
+        <div class="switch">
+          <div class="switch-item on">编辑</div>
+          <div class="switch-item">预览</div>
+        </div>
+        <div class="button">提交</div>
+      </div>
+    </section>
+    <section class="tips">注：评论支持 markdown 语法！</section>
+    <section class="list-wrap">
+      <ul class="list">
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">张德龙</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like liked">已赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">333333</div>
+          </div>
+        </li>
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">刘德华</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like">点赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">vvvvv</div>
+          </div>
+        </li>
+      </ul>
+      <div class="page-nav">
+        <a href="javascript: void(0);" class="item">1</a>
+        <a href="javascript: void(0);" class="item">2</a>
+        <a href="javascript: void(0);" class="item current">3</a>
+      </div>
+    </section>
+    -->
+  </div>
+  <script>
+  JELON.Comment({
+    container: 'comments',
+    label: 'git' || '2017/06/24/git/',
+    owner: 'jangdelong',
+    repo: 'blog_comments',
+    clientId: 'b08ed25e52c57993e69c',
+    clientSecret: '1cb9545488f0380904b87350e7c5a270ae03bab7'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/技术交流/">技术交流</a>
+        <span class="badge">(9)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/生活琐事/">生活琐事</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/vue/" title="vue">vue (4)</a>
+  
+    <a class="tag-item" href="/tags/HTTP/" title="HTTP">HTTP (2)</a>
+  
+    <a class="tag-item" href="/tags/非技术向/" title="非技术向">非技术向 (1)</a>
+  
+    <a class="tag-item" href="/tags/PHP/" title="PHP">PHP (3)</a>
+  
+    <a class="tag-item" href="/tags/Mysql/" title="Mysql">Mysql (1)</a>
+  
+    <a class="tag-item" href="/tags/git/" title="git">git (1)</a>
+  
+    <a class="tag-item" href="/tags/css/" title="css">css (1)</a>
+  
+    <a class="tag-item" href="/tags/样式库/" title="样式库">样式库 (2)</a>
+  
+    <a class="tag-item" href="/tags/微信开发/" title="微信开发">微信开发 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.sina.com.cn/u/1825875765" target="_blank" title="网络安全博客">Haoren博客</a>
+        </li>
+    
+        <li>
+            <a href="http://blog.csdn.net/yeweiouyang" target="_blank" title="技术博客">Maxwell博客</a>
+        </li>
+    
+        <li>
+            <a href="http://xuanzh.cc/" target="_blank" title="技术博客">朱旋个人博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2018
+    
+
+    <a href="/">爱生活 爱自己</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>
+</html>

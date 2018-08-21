@@ -232,7 +232,7 @@
 <ol>
 <li>首先在 assets 文件下新建个 styles 文件夹，然后在这个文件夹里新建个 <strong>theme.less</strong> 文件</li>
 <li><p>我们之前在 build/webpack.base.conf.js 中增加 vux 的配置，现在要在里面使用 <strong>less-theme</strong> 这个插件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">module.exports = vuxLoader.merge(webpackConfig, &#123;</span><br><span class="line">  plugins: [&#123;</span><br><span class="line">    name: &apos;vux-ui&apos;</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    name: &apos;duplicate-style&apos;</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    name: &apos;less-theme&apos;,                 // 增加这个插件</span><br><span class="line">    path: &apos;src/styles/theme.less&apos;       // 引入之前我们定义的那个less文件</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">module.exports = vuxLoader.merge(webpackConfig, &#123;</span><br><span class="line">  plugins: [&#123;</span><br><span class="line">    name: &apos;vux-ui&apos;</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    name: &apos;duplicate-style&apos;</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    name: &apos;less-theme&apos;,                 // 增加这个插件</span><br><span class="line">    path: &apos;src/assets/styles/theme.less&apos;       // 引入之前我们定义的那个less文件</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>这里以 <strong>XButton</strong> 为例，自定义我们的主题</p>
 </li>
@@ -335,7 +335,11 @@
     
     <span class="prev fl">
         上一篇<br >
-        <a href="javascript: void(0);">没有上一篇了</a>
+        <a href="/2018/08/21/vue-bootstrap/">
+            
+                vue 项目中使用 bootstrap
+            
+        </a>
     </span>
     
 
@@ -442,7 +446,7 @@
     
     <li>
         <a href="/categories/技术交流/">技术交流</a>
-        <span class="badge">(6)</span>
+        <span class="badge">(9)</span>
     </li>
     
     <li>
@@ -459,7 +463,7 @@
         <!-- 文章标签 -->
 <div class="widget-bd tag-wrap">
   
-    <a class="tag-item" href="/tags/vue/" title="vue">vue (3)</a>
+    <a class="tag-item" href="/tags/vue/" title="vue">vue (4)</a>
   
     <a class="tag-item" href="/tags/HTTP/" title="HTTP">HTTP (2)</a>
   
@@ -469,9 +473,13 @@
   
     <a class="tag-item" href="/tags/Mysql/" title="Mysql">Mysql (1)</a>
   
-    <a class="tag-item" href="/tags/微信订阅号/" title="微信订阅号">微信订阅号 (1)</a>
+    <a class="tag-item" href="/tags/git/" title="git">git (1)</a>
   
-    <a class="tag-item" href="/tags/样式库/" title="样式库">样式库 (1)</a>
+    <a class="tag-item" href="/tags/css/" title="css">css (1)</a>
+  
+    <a class="tag-item" href="/tags/样式库/" title="样式库">样式库 (2)</a>
+  
+    <a class="tag-item" href="/tags/微信开发/" title="微信开发">微信开发 (1)</a>
   
 </div>
     </section>

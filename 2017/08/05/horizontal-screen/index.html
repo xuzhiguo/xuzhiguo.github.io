@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
     <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
     
-    <title>hello world | Hexo</title>
+    <title>用CSS3的 transform 解决移动端横屏问题 | Hexo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
     <meta name="keywords" content="前端, Web, 徐枝国, 前端开发" >
     <meta name="description" content="徐枝国个人前端小站" >
@@ -56,19 +56,19 @@
         <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
         <ul class="menu hidden" id="JELON__menu">
             
-            <li rel="/2017/03/20/hello-world/index.html" class="item ">
+            <li rel="/2017/08/05/horizontal-screen/index.html" class="item ">
                 <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
             </li>
             
-            <li rel="/2017/03/20/hello-world/index.html" class="item ">
+            <li rel="/2017/08/05/horizontal-screen/index.html" class="item ">
                 <a href="/lab/" title="实验室" class="icon-lab">&nbsp;实验室</a>
             </li>
             
-            <li rel="/2017/03/20/hello-world/index.html" class="item ">
+            <li rel="/2017/08/05/horizontal-screen/index.html" class="item ">
                 <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
             </li>
             
-            <li rel="/2017/03/20/hello-world/index.html" class="item ">
+            <li rel="/2017/08/05/horizontal-screen/index.html" class="item ">
                 <a href="/comment/" title="留言" class="icon-comment">&nbsp;留言</a>
             </li>
             
@@ -120,24 +120,31 @@
 <!-- 文章 -->
 <article class="post article">
     <header class="text-center">
-        <h3 class="post-title"><span>hello world</span></h3>
+        <h3 class="post-title"><span>用CSS3的 transform 解决移动端横屏问题</span></h3>
     </header>
     <p class="post-meta text-center">
         xuzg 发表于
-        <time datetime="2017-03-19T16:00:00.000Z">2017-03-20</time>
+        <time datetime="2017-08-04T16:00:00.000Z">2017-08-05</time>
     </p>
     <div class="post-content">
-        
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近遇到一个需求，要做电子签名，手机的屏幕又不像pad的屏幕那么大，为了体验良好只能横屏。但原生（安卓和ios）并不愿意横屏，说他们不好实现，那只能我们H5妥协了。</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><blockquote>
+<p>这里是用css3的 旋转和转换实现的，先直接上方法，后面再解析<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function horizontalScreen(className) &#123;</span><br><span class="line">    /* transform 强制横屏  */</span><br><span class="line">    var conW = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;</span><br><span class="line">    var conH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">    $(className).css(&#123;</span><br><span class="line">        &quot;transform&quot;: &quot;rotate(90deg) translate(&quot; + ((conH - conW) / 2) + &quot;px,&quot; + ((conH - conW) / 2) +</span><br><span class="line">            &quot;px)&quot;,</span><br><span class="line">        &quot;width&quot;: conH + &quot;px&quot;,</span><br><span class="line">        &quot;height&quot;: conW + &quot;px&quot;,</span><br><span class="line">        &quot;transform-origin&quot;: &quot;center center&quot;,</span><br><span class="line">        &quot;-webkit-transform-origin&quot;: &quot;center center&quot;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>现在来解释一下这个方法内部实现的原理，首先先获取屏幕可视区域的宽度 conW和高度 conH，然后把整个大容器旋转90度。由于是以屏幕中心的C点为原点来旋转的，故B点旋转后就到了A点。要想让A点回到B点的位置，就需要往 X轴和Y轴都移动 (conH - conW) / 2) 的距离。最后在把高度设置conW，宽度设置为conH，就完成了。</p>
+<p><img src="/2017/08/05/horizontal-screen/blog1.png" alt="image"></p>
+<p>图在 ps 上随手画的，略丑将就着就看吧~</p>
+
     </div>
     <p class="post-meta">
         <span class="post-cat">分类：
-            <a class="cat-link" href="/categories/生活琐事/">生活琐事</a>
+            <a class="cat-link" href="/categories/技术交流/">技术交流</a>
         </span>
         <span class="post-tags">
             标签：
             
     
-        <a href="/tags/非技术向/" title="非技术向">非技术向</a>
+        <a href="/tags/css/" title="css">css</a>
     
 
         </span>
@@ -163,9 +170,9 @@
     
     <span class="prev fl">
         上一篇<br >
-        <a href="/2017/04/17/php-connect-mysql/">
+        <a href="/2017/09/16/axios/">
             
-                php 连接 mysql 操纵数据库
+                axios 的使用
             
         </a>
     </span>
@@ -174,7 +181,11 @@
     
     <span class="next fr">
         下一篇<br >
-        <a href="javascript: void(0);">没有下一篇了</a>
+        <a href="/2017/06/24/git/">
+            
+                git 入门
+            
+        </a>
     </span>
     
 </div>
@@ -249,7 +260,7 @@
   <script>
   JELON.Comment({
     container: 'comments',
-    label: 'hello-world' || '2017/03/20/hello-world/',
+    label: 'horizontal-screen' || '2017/08/05/horizontal-screen/',
     owner: 'jangdelong',
     repo: 'blog_comments',
     clientId: 'b08ed25e52c57993e69c',
