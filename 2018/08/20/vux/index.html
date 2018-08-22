@@ -142,7 +142,7 @@
 </blockquote>
 <hr>
 <h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><blockquote>
-<p>1、找到 build/webpack.base.conf.js，增加配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const vueLoaderConfig = require(&apos;./vue-loader.conf&apos;) // 这是原来 vue-loader 的配置</span><br><span class="line">const vuxLoader = require(&apos;vux-loader&apos;)</span><br><span class="line"></span><br><span class="line">// 增加以下</span><br><span class="line">module.exports = vuxLoader.merge(webpackConfig, &#123;</span><br><span class="line">  plugins: [&#123;</span><br><span class="line">    name: &apos;vux-ui&apos;</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    name: &apos;duplicate-style&apos;</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>1、找到 build/webpack.base.conf.js，增加配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const vueLoaderConfig = require(&apos;./vue-loader.conf&apos;) // 这是原来 vue-loader 的配置</span><br><span class="line">const vuxLoader = require(&apos;vux-loader&apos;)</span><br><span class="line"></span><br><span class="line">// 增加以下</span><br><span class="line">module.exports = vuxLoader.merge(vueLoaderConfig, &#123;</span><br><span class="line">  plugins: [&#123;</span><br><span class="line">    name: &apos;vux-ui&apos;</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    name: &apos;duplicate-style&apos;</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
 </blockquote>
 <p>tips：<strong>duplicate-style</strong> 插件是用来清除 css 重复代码的，建议还是加上吧。</p>
 <h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>一切准备就绪，那就可以开始使用了~</p>
@@ -467,19 +467,19 @@
   
     <a class="tag-item" href="/tags/HTTP/" title="HTTP">HTTP (2)</a>
   
+    <a class="tag-item" href="/tags/git/" title="git">git (1)</a>
+  
     <a class="tag-item" href="/tags/非技术向/" title="非技术向">非技术向 (1)</a>
   
     <a class="tag-item" href="/tags/PHP/" title="PHP">PHP (3)</a>
   
     <a class="tag-item" href="/tags/Mysql/" title="Mysql">Mysql (1)</a>
   
-    <a class="tag-item" href="/tags/git/" title="git">git (1)</a>
+    <a class="tag-item" href="/tags/微信开发/" title="微信开发">微信开发 (1)</a>
   
     <a class="tag-item" href="/tags/css/" title="css">css (1)</a>
   
     <a class="tag-item" href="/tags/样式库/" title="样式库">样式库 (2)</a>
-  
-    <a class="tag-item" href="/tags/微信开发/" title="微信开发">微信开发 (1)</a>
   
 </div>
     </section>
