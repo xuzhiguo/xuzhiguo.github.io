@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
     <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
     
-    <title>vue 项目中使用 bootstrap | Hexo</title>
+    <title>win10 cortnan 突然无法使用的解决方法 | Hexo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
     <meta name="keywords" content="前端, Web, 徐枝国, 前端开发" >
     <meta name="description" content="徐枝国个人前端小站" >
@@ -56,19 +56,19 @@
         <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
         <ul class="menu hidden" id="JELON__menu">
             
-            <li rel="/2018/08/21/vue-bootstrap/index.html" class="item ">
+            <li rel="/2018/09/17/win10-cortnan/index.html" class="item ">
                 <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
             </li>
             
-            <li rel="/2018/08/21/vue-bootstrap/index.html" class="item ">
+            <li rel="/2018/09/17/win10-cortnan/index.html" class="item ">
                 <a href="/lab/" title="实验室" class="icon-lab">&nbsp;实验室</a>
             </li>
             
-            <li rel="/2018/08/21/vue-bootstrap/index.html" class="item ">
+            <li rel="/2018/09/17/win10-cortnan/index.html" class="item ">
                 <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
             </li>
             
-            <li rel="/2018/08/21/vue-bootstrap/index.html" class="item ">
+            <li rel="/2018/09/17/win10-cortnan/index.html" class="item ">
                 <a href="/comment/" title="留言" class="icon-comment">&nbsp;留言</a>
             </li>
             
@@ -120,36 +120,32 @@
 <!-- 文章 -->
 <article class="post article">
     <header class="text-center">
-        <h3 class="post-title"><span>vue 项目中使用 bootstrap</span></h3>
+        <h3 class="post-title"><span>win10 cortnan 突然无法使用的解决方法</span></h3>
     </header>
     <p class="post-meta text-center">
         xuzg 发表于
-        <time datetime="2018-08-21T00:55:12.815Z">2018-08-21</time>
+        <time datetime="2018-09-17T02:05:17.859Z">2018-09-17</time>
     </p>
     <div class="post-content">
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p><strong>bootstrap</strong> 响应式开发很方便的框架，这在屏幕大小混杂的移动端可以说是神器啊。另外 <strong>vue</strong> 是如今前端框架三巨头之一，可见两者受欢迎的程度了，今天就试着将两者融合起来。</p>
-<h3 id="Jquery"><a href="#Jquery" class="headerlink" title="Jquery"></a>Jquery</h3><p>bootstrap 和 Jquery 是两基友，bootstrap里面有些效果还是用 Jquery 来写的。所以你要使用 bootstrap 那 Jquery 还是必须要装的。</p>
-<p>安装：</p>
-<pre><code>- 在项目根目录打开命令行，键入 npm install jqurey --save-dev
-- 这样就安装成功了，并且会把依赖保存在 `devDependencies` 中
-</code></pre><p>配置</p>
-<pre><code>- 找到 **build/webpack.base.conf.js** 文件
-- 在 **module.exports** 中添加下面配置：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">plugins:[</span><br><span class="line">    new webpack.optimize.CommonsChunkPlugin(&apos;common.js&apos;),</span><br><span class="line">    new webpack.ProvidePlugin(&#123;</span><br><span class="line">         jQuery: &quot;jquery&quot;,</span><br><span class="line">         $: &quot;jquery&quot;</span><br><span class="line">    &#125;)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+        <h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li>进入目录 <strong>C:\Windows\System32\WindowsPowerShell\v1.0</strong>，找到 <strong>powershell.exe</strong>，右键以管理员身份运行。</li>
+<li>输入 <strong>Get-AppxPackage *cortana*</strong></li>
+<li>找到输出信息中的 <strong>InstallLocation</strong> 一栏，这是cortnan的安装位置，把安装位置记录下来</li>
+<li><p>输入 <strong>输入add-appxpackage -register “【这里粘贴InstallLocation的信息】\appxmanifest.xml” -disabledevelopmentmode</strong></p>
+<ul>
+<li>例如：<code>add-appxpackage -register &quot;C:\Windows\SystemApps\Microsoft.Windows.Cortana_cw5n1h2txyewy\appxmanifest.xml&quot; -disabledevelopmentmode</code></li>
+</ul>
+</li>
+<li><p>然后就OK了~</p>
+</li>
+</ol>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><blockquote>
+<p>如果安装时显示 <strong>add-appxpackage : 部署失败，原因是 HRESULT: 0x80073D0A, 无法安装该程序包</strong></p>
+</blockquote>
+<ul>
+<li>Windows 防火墙服务未运行，打开防火墙就行了</li>
+</ul>
 
-- 在 **main.js** 中 引入 **jquery**
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">improt $ from &apos;jquery&apos;</span><br></pre></td></tr></table></figure>
-</code></pre><h3 id="bootstrap"><a href="#bootstrap" class="headerlink" title="bootstrap"></a>bootstrap</h3><p>安装</p>
-<pre><code>- 在项目根目录打开命令行
-- 输入 npm install bootstrap@3 --save-dev
-</code></pre><p>配置</p>
-<pre><code>- 找到 build/webpack.base.conf.js 文件
-- 在 module.exports-&gt;resolve-&gt;alias 中添加配置
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;bootstrap&apos;: resolve(&apos;bootstrap&apos;),</span><br></pre></td></tr></table></figure>
-
-- 在 main.js 中引入 bootstrap 的文件
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import &apos;bootstrap/dist/js/bootstrap.min.js&apos;</span><br><span class="line">import &apos;bootstrap/dist/css/bootstrap.min.css&apos;</span><br></pre></td></tr></table></figure>
-</code></pre>
     </div>
     <p class="post-meta">
         <span class="post-cat">分类：
@@ -159,9 +155,7 @@
             标签：
             
     
-        <a href="/tags/vue/" title="vue">vue</a> / 
-    
-        <a href="/tags/样式库/" title="样式库">样式库</a>
+        <a href="/tags/win10/" title="win10">win10</a>
     
 
         </span>
@@ -187,20 +181,16 @@
     
     <span class="prev fl">
         上一篇<br >
-        <a href="/2018/09/07/bootstrap/">
-            
-                bootstrap 入门
-            
-        </a>
+        <a href="javascript: void(0);">没有上一篇了</a>
     </span>
     
 
     
     <span class="next fr">
         下一篇<br >
-        <a href="/2018/08/20/vux/">
+        <a href="/2018/09/07/bootstrap/">
             
-                vux 入门
+                bootstrap 入门
             
         </a>
     </span>
@@ -277,7 +267,7 @@
   <script>
   JELON.Comment({
     container: 'comments',
-    label: 'vue-bootstrap' || '2018/08/21/vue-bootstrap/',
+    label: 'win10-cortnan' || '2018/09/17/win10-cortnan/',
     owner: 'jangdelong',
     repo: 'blog_comments',
     clientId: 'b08ed25e52c57993e69c',
