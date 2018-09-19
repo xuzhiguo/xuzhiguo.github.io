@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
     <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
     
-    <title>hello world | Hexo</title>
+    <title>部署IIS遇到的问题总结 | Hexo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
     <meta name="keywords" content="前端, Web, 徐枝国, 前端开发" >
     <meta name="description" content="徐枝国个人前端小站" >
@@ -56,19 +56,19 @@
         <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
         <ul class="menu hidden" id="JELON__menu">
             
-            <li rel="/2017/03/20/hello-world/index.html" class="item ">
+            <li rel="/2018/09/18/QYWechat/index.html" class="item ">
                 <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
             </li>
             
-            <li rel="/2017/03/20/hello-world/index.html" class="item ">
+            <li rel="/2018/09/18/QYWechat/index.html" class="item ">
                 <a href="/lab/" title="实验室" class="icon-lab">&nbsp;实验室</a>
             </li>
             
-            <li rel="/2017/03/20/hello-world/index.html" class="item ">
+            <li rel="/2018/09/18/QYWechat/index.html" class="item ">
                 <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
             </li>
             
-            <li rel="/2017/03/20/hello-world/index.html" class="item ">
+            <li rel="/2018/09/18/QYWechat/index.html" class="item ">
                 <a href="/comment/" title="留言" class="icon-comment">&nbsp;留言</a>
             </li>
             
@@ -120,25 +120,98 @@
 <!-- 文章 -->
 <article class="post article">
     <header class="text-center">
-        <h3 class="post-title"><span>hello world</span></h3>
+        <h3 class="post-title"><span>部署IIS遇到的问题总结</span></h3>
     </header>
     <p class="post-meta text-center">
         xuzg 发表于
-        <time datetime="2017-03-19T16:00:00.000Z">2017-03-20</time>
+        <time datetime="2018-09-18T03:10:26.815Z">2018-09-18</time>
     </p>
     <div class="post-content">
-        <p>某天上网看到了别人高大上的博客，心想那么花哨的东西，我怎么能没有呢？忙活了大半天终于搭建成功了Zzz~ <br><br>以后有些什么东西可以通过这个博客来分享，希望能坚持…</p>
-
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>第一次部署项目到IIS，出现挺多问题，做个笔记，长个记性~</p>
+<h3 id="问题列表"><a href="#问题列表" class="headerlink" title="问题列表"></a>问题列表</h3><h5 id="1-发布到-IIS-访问网站提示-HTTP-Error-500-19-Internal-Server-Error-配置错误-由于权限不足而无法读取配置文件"><a href="#1-发布到-IIS-访问网站提示-HTTP-Error-500-19-Internal-Server-Error-配置错误-由于权限不足而无法读取配置文件" class="headerlink" title="1. 发布到 IIS 访问网站提示 HTTP Error 500.19 - Internal Server Error 配置错误 由于权限不足而无法读取配置文件"></a>1. 发布到 IIS 访问网站提示 <strong>HTTP Error 500.19 - Internal Server Error</strong> 配置错误 由于权限不足而无法读取配置文件</h5><blockquote>
+<p>问题原因：</p>
+</blockquote>
+<pre><code>- 由于权限不足而无法读取配置文件
+</code></pre><blockquote>
+<p>解决方法：</p>
+</blockquote>
+<pre><code>- 设置文件夹的操纵权限
+    原文件夹，右击选择它的属性，打开“安全”选项卡 -&gt;
+    编辑 -&gt; *的权限选项卡 -&gt; 添加 -&gt; 选择组或用户选项卡 -&gt; 高级 -&gt; 立即查找 -&gt; 
+    找到Everyone -&gt; 选择并确定 -&gt; 选择Everyone -&gt; 允许这栏设置完全控制 -&gt; 确定
+    ----------------------------------------------------------------------
+- 同理把配置文件也设置一下操作权限
+</code></pre><h5 id="2-发布到-iis-访问网站无响应（假死状态）"><a href="#2-发布到-iis-访问网站无响应（假死状态）" class="headerlink" title="2. 发布到 iis 访问网站无响应（假死状态）"></a>2. 发布到 iis 访问网站无响应（假死状态）</h5><blockquote>
+<p>问题可能原因：</p>
+</blockquote>
+<pre><code>- 独立进程的 内存堆戋消耗完了，IIS不能创建更多的进程工作空间来处理
+</code></pre><blockquote>
+<p>解决方法：</p>
+</blockquote>
+<pre><code>- 重启 IIS
+    最外层用户 -&gt; 重新启动
+</code></pre><h5 id="3-windows-server-2008-R2-装-iis"><a href="#3-windows-server-2008-R2-装-iis" class="headerlink" title="3. windows server 2008 R2 装 iis"></a>3. windows server 2008 R2 装 iis</h5><blockquote>
+<p>步骤</p>
+</blockquote>
+<pre><code>- 控制面板 -&gt; 管理工具 -&gt; 服务器管理
+</code></pre><h5 id="4-发布时会有遗漏外部引入的-dll-文件的情况"><a href="#4-发布时会有遗漏外部引入的-dll-文件的情况" class="headerlink" title="4. 发布时会有遗漏外部引入的 dll 文件的情况"></a>4. 发布时会有遗漏外部引入的 dll 文件的情况</h5><pre><code>- 发布后记得检查一下发布出的bin文件夹里有没有, 如果没有则自己手动把dll文件放到该目录之下
+</code></pre><h5 id="5-调-webservice-的接口最好是用服务引用的方式（我之前是用-HttpWebRequest，本地调用可以，结果生产环境调用失败了）"><a href="#5-调-webservice-的接口最好是用服务引用的方式（我之前是用-HttpWebRequest，本地调用可以，结果生产环境调用失败了）" class="headerlink" title="5. 调 webservice 的接口最好是用服务引用的方式（我之前是用 HttpWebRequest，本地调用可以，结果生产环境调用失败了）"></a>5. 调 webservice 的接口最好是用服务引用的方式（我之前是用 HttpWebRequest，本地调用可以，结果生产环境调用失败了）</h5><blockquote>
+<p>使用步骤</p>
+</blockquote>
+<pre><code>1. 在解决方案中选中项目，右键添加服务引用
+2. 在地址一栏里输入 webservice 的地址，点击前往
+3. 找到服务后，点下面的高级按钮，点添加 web 引用
+4. 在 URL 一栏中输入 webservice 的地址，点击右边箭头
+5. 找到服务后，记住找到 *服务的名字* 和 *web 引入名*，然后点添加引用
+6. 现在就可以在你的项目中调用 webservice 了
+</code></pre><blockquote>
+<p>调用实例 </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 先创建一个实例  web引入名.服务的名字</span><br><span class="line">WebReference.WebService1 w = new WebReference.WebService1();</span><br><span class="line"></span><br><span class="line">// 调用方法</span><br><span class="line">w.sum(1,2);</span><br></pre></td></tr></table></figure>
+<h5 id="6-“-”应用程序中的服务器错误"><a href="#6-“-”应用程序中的服务器错误" class="headerlink" title="6. “/”应用程序中的服务器错误"></a>6. “/”应用程序中的服务器错误</h5><blockquote>
+<p>问题原因</p>
+</blockquote>
+<pre><code>- 应用程序池版本与应用的 Framework 版本不兼容
+</code></pre><blockquote>
+<p>解决方法</p>
+</blockquote>
+<pre><code>- 使用与 应用 Framework 兼容的 应用程序池
+- 我这里是使用 Framework 4.0，可以去我的网盘下载，下载地址 https://pan.baidu.com/s/14J8NBrvuHxYQjESEYKvrgw
+- 安装成功后，找到你的网站 -&gt; 高级设置 -&gt; 应用程序池 -&gt; 选择 .net v4.0 classic
+</code></pre><h5 id="7-部署-IIS，打开网站提示-未能加载文件或程序集“Interop-Domino”或它的某一个依赖项。试图加载格式不正确的程序"><a href="#7-部署-IIS，打开网站提示-未能加载文件或程序集“Interop-Domino”或它的某一个依赖项。试图加载格式不正确的程序" class="headerlink" title="7. 部署 IIS，打开网站提示 未能加载文件或程序集“Interop.Domino”或它的某一个依赖项。试图加载格式不正确的程序"></a>7. 部署 IIS，打开网站提示 <em>未能加载文件或程序集“Interop.Domino”或它的某一个依赖项。试图加载格式不正确的程序</em></h5><blockquote>
+<p>问题原因</p>
+</blockquote>
+<pre><code>- 部署的机子是 x64的，而 Interop.Domino.dll 是 x32 的版本
+</code></pre><blockquote>
+<p>解决方法</p>
+</blockquote>
+<pre><code>- 通过更改IIS的应用程序池来解决：
+1. 打开iis选择应用程序池
+2. 选择你网站使用的应用程序池，点击右边高级设置
+3. 启用 32 位应用程序一栏选择 true，确定就OK了~
+</code></pre><h5 id="8-部署-IIS，打开网站提示-TTP-错误-403-14-Forbidden，Web-服务器被配置为不列出此目录的内容"><a href="#8-部署-IIS，打开网站提示-TTP-错误-403-14-Forbidden，Web-服务器被配置为不列出此目录的内容" class="headerlink" title="8. 部署 IIS，打开网站提示 TTP 错误 403.14 - Forbidden，Web 服务器被配置为不列出此目录的内容"></a>8. 部署 IIS，打开网站提示 TTP 错误 403.14 - Forbidden，Web 服务器被配置为不列出此目录的内容</h5><blockquote>
+<p>问题原因</p>
+</blockquote>
+<pre><code>- 没有为请求的 URL 配置默认文档，并且没有在服务器上启用目录浏览
+</code></pre><blockquote>
+<p>解决方法</p>
+</blockquote>
+<pre><code>1. 设置默认文档（推荐）
+    - 找到你的网站，双击默认文档
+    - 点击右边添加，名称填你默认想打开的文件
+2. 启用目录浏览
+    - 双击目录浏览，点击右边启用
+</code></pre>
     </div>
     <p class="post-meta">
         <span class="post-cat">分类：
-            <a class="cat-link" href="/categories/生活琐事/">生活琐事</a>
+            <a class="cat-link" href="/categories/技术交流/">技术交流</a>
         </span>
         <span class="post-tags">
             标签：
             
     
-        <a href="/tags/非技术向/" title="非技术向">非技术向</a>
+        <a href="/tags/c/" title="c#">c#</a>
     
 
         </span>
@@ -164,18 +237,18 @@
     
     <span class="prev fl">
         上一篇<br >
-        <a href="/2017/04/17/php-connect-mysql/">
-            
-                php 连接 mysql 操纵数据库
-            
-        </a>
+        <a href="javascript: void(0);">没有上一篇了</a>
     </span>
     
 
     
     <span class="next fr">
         下一篇<br >
-        <a href="javascript: void(0);">没有下一篇了</a>
+        <a href="/2018/09/18/MapPath/">
+            
+                ASP.NET多线程下使用HttpContext.Current为null解决方案
+            
+        </a>
     </span>
     
 </div>
@@ -250,7 +323,7 @@
   <script>
   JELON.Comment({
     container: 'comments',
-    label: 'hello-world' || '2017/03/20/hello-world/',
+    label: 'QYWechat' || '2018/09/18/QYWechat/',
     owner: 'jangdelong',
     repo: 'blog_comments',
     clientId: 'b08ed25e52c57993e69c',

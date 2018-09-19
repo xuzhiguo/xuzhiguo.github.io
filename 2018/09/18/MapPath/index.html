@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
     <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
     
-    <title>hello world | Hexo</title>
+    <title>ASP.NET多线程下使用HttpContext.Current为null解决方案 | Hexo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
     <meta name="keywords" content="前端, Web, 徐枝国, 前端开发" >
     <meta name="description" content="徐枝国个人前端小站" >
@@ -56,19 +56,19 @@
         <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
         <ul class="menu hidden" id="JELON__menu">
             
-            <li rel="/2017/03/20/hello-world/index.html" class="item ">
+            <li rel="/2018/09/18/MapPath/index.html" class="item ">
                 <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
             </li>
             
-            <li rel="/2017/03/20/hello-world/index.html" class="item ">
+            <li rel="/2018/09/18/MapPath/index.html" class="item ">
                 <a href="/lab/" title="实验室" class="icon-lab">&nbsp;实验室</a>
             </li>
             
-            <li rel="/2017/03/20/hello-world/index.html" class="item ">
+            <li rel="/2018/09/18/MapPath/index.html" class="item ">
                 <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
             </li>
             
-            <li rel="/2017/03/20/hello-world/index.html" class="item ">
+            <li rel="/2018/09/18/MapPath/index.html" class="item ">
                 <a href="/comment/" title="留言" class="icon-comment">&nbsp;留言</a>
             </li>
             
@@ -120,25 +120,25 @@
 <!-- 文章 -->
 <article class="post article">
     <header class="text-center">
-        <h3 class="post-title"><span>hello world</span></h3>
+        <h3 class="post-title"><span>ASP.NET多线程下使用HttpContext.Current为null解决方案</span></h3>
     </header>
     <p class="post-meta text-center">
         xuzg 发表于
-        <time datetime="2017-03-19T16:00:00.000Z">2017-03-20</time>
+        <time datetime="2018-09-18T03:01:57.314Z">2018-09-18</time>
     </p>
     <div class="post-content">
-        <p>某天上网看到了别人高大上的博客，心想那么花哨的东西，我怎么能没有呢？忙活了大半天终于搭建成功了Zzz~ <br><br>以后有些什么东西可以通过这个博客来分享，希望能坚持…</p>
-
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>老大说希望在项目中加一个日志功能，目前的项目是一个多线程轮询的架构。添加日志需要获取文件绝对路径，这时发现 <strong>HttpContext.Current</strong> 为 null。</p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public static string MapPath(string strPath)</span><br><span class="line">&#123;</span><br><span class="line">    if (HttpContext.Current != null)</span><br><span class="line">    &#123;</span><br><span class="line">        return HttpContext.Current.Server.MapPath(strPath);</span><br><span class="line">    &#125;</span><br><span class="line">    else </span><br><span class="line">    &#123;</span><br><span class="line">        strPath = strPath.Replace(&quot;/&quot;, &quot;\\&quot;);</span><br><span class="line">        if (strPath.StartsWith(&quot;\\&quot;))</span><br><span class="line">        &#123;</span><br><span class="line">            strPath = strPath.TrimStart(&apos;\\&apos;);</span><br><span class="line">        &#125;</span><br><span class="line">        return System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, strPath);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
     <p class="post-meta">
         <span class="post-cat">分类：
-            <a class="cat-link" href="/categories/生活琐事/">生活琐事</a>
+            <a class="cat-link" href="/categories/技术交流/">技术交流</a>
         </span>
         <span class="post-tags">
             标签：
             
     
-        <a href="/tags/非技术向/" title="非技术向">非技术向</a>
+        <a href="/tags/c/" title="c#">c#</a>
     
 
         </span>
@@ -164,9 +164,9 @@
     
     <span class="prev fl">
         上一篇<br >
-        <a href="/2017/04/17/php-connect-mysql/">
+        <a href="/2018/09/18/QYWechat/">
             
-                php 连接 mysql 操纵数据库
+                部署IIS遇到的问题总结
             
         </a>
     </span>
@@ -175,7 +175,11 @@
     
     <span class="next fr">
         下一篇<br >
-        <a href="javascript: void(0);">没有下一篇了</a>
+        <a href="/2018/09/17/win10-cortnan/">
+            
+                win10 cortnan 突然无法使用的解决方法
+            
+        </a>
     </span>
     
 </div>
@@ -250,7 +254,7 @@
   <script>
   JELON.Comment({
     container: 'comments',
-    label: 'hello-world' || '2017/03/20/hello-world/',
+    label: 'MapPath' || '2018/09/18/MapPath/',
     owner: 'jangdelong',
     repo: 'blog_comments',
     clientId: 'b08ed25e52c57993e69c',
