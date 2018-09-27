@@ -144,7 +144,7 @@
 </code></pre><h5 id="2-发布到-iis-访问网站无响应（假死状态）"><a href="#2-发布到-iis-访问网站无响应（假死状态）" class="headerlink" title="2. 发布到 iis 访问网站无响应（假死状态）"></a>2. 发布到 iis 访问网站无响应（假死状态）</h5><blockquote>
 <p>问题可能原因：</p>
 </blockquote>
-<pre><code>- 独立进程的 内存堆戋消耗完了，IIS不能创建更多的进程工作空间来处理
+<pre><code>- 独立进程的 内存堆栈消耗完了，IIS不能创建更多的进程工作空间来处理
 </code></pre><blockquote>
 <p>解决方法：</p>
 </blockquote>
@@ -201,6 +201,20 @@
     - 点击右边添加，名称填你默认想打开的文件
 2. 启用目录浏览
     - 双击目录浏览，点击右边启用
+</code></pre><h5 id="9-IIS-上的网站运行了一段时间后，被自动回收"><a href="#9-IIS-上的网站运行了一段时间后，被自动回收" class="headerlink" title="9. IIS 上的网站运行了一段时间后，被自动回收"></a>9. IIS 上的网站运行了一段时间后，被自动回收</h5><blockquote>
+<p>问题原因</p>
+</blockquote>
+<pre><code>- iis 回收的固定时间间隔为 1740 分钟，意味着网站运行了 1740 分钟后，应用程序池会被回收
+- iis 应用程序池闲置超时时间为 20 分钟，意味着20分钟内工作线程没有处理任何请求，也没接受到任何新的请求，则会被自动回收掉
+</code></pre><blockquote>
+<p>解决方法</p>
+</blockquote>
+<pre><code>1. 找到你网站使用的应用程序池，打开高级设置
+2. 将 固定时间间隔 设置为 0
+3. 将 闲置超时时间 设置为 0
+</code></pre><h5 id="10-在微信里接收企业微信的信息"><a href="#10-在微信里接收企业微信的信息" class="headerlink" title="10. 在微信里接收企业微信的信息"></a>10. 在微信里接收企业微信的信息</h5><pre><code>- 登录企业微信管理后台 https://work.weixin.qq.com/
+- 找到连接微信 -&gt; 微工作台
+- 拉到底下邀请关注那栏找到 二维码，微信扫描关注
 </code></pre>
     </div>
     <p class="post-meta">
@@ -363,19 +377,19 @@
   
     <a class="tag-item" href="/tags/c/" title="c#">c# (2)</a>
   
-    <a class="tag-item" href="/tags/vue/" title="vue">vue (4)</a>
-  
-    <a class="tag-item" href="/tags/HTTP/" title="HTTP">HTTP (2)</a>
-  
     <a class="tag-item" href="/tags/样式库/" title="样式库">样式库 (3)</a>
   
     <a class="tag-item" href="/tags/非技术向/" title="非技术向">非技术向 (1)</a>
   
+    <a class="tag-item" href="/tags/vue/" title="vue">vue (4)</a>
+  
+    <a class="tag-item" href="/tags/HTTP/" title="HTTP">HTTP (2)</a>
+  
     <a class="tag-item" href="/tags/git/" title="git">git (1)</a>
   
-    <a class="tag-item" href="/tags/css/" title="css">css (1)</a>
-  
     <a class="tag-item" href="/tags/PHP/" title="PHP">PHP (3)</a>
+  
+    <a class="tag-item" href="/tags/css/" title="css">css (1)</a>
   
     <a class="tag-item" href="/tags/Mysql/" title="Mysql">Mysql (1)</a>
   
