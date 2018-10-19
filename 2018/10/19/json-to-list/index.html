@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
     <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
     
-    <title>hello world | Hexo</title>
+    <title>c# Json字符串 转为 List | Hexo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
     <meta name="keywords" content="前端, Web, 徐枝国, 前端开发" >
     <meta name="description" content="徐枝国个人前端小站" >
@@ -56,19 +56,19 @@
         <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
         <ul class="menu hidden" id="JELON__menu">
             
-            <li rel="/2017/03/20/hello-world/index.html" class="item ">
+            <li rel="/2018/10/19/json-to-list/index.html" class="item ">
                 <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
             </li>
             
-            <li rel="/2017/03/20/hello-world/index.html" class="item ">
+            <li rel="/2018/10/19/json-to-list/index.html" class="item ">
                 <a href="/lab/" title="实验室" class="icon-lab">&nbsp;实验室</a>
             </li>
             
-            <li rel="/2017/03/20/hello-world/index.html" class="item ">
+            <li rel="/2018/10/19/json-to-list/index.html" class="item ">
                 <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
             </li>
             
-            <li rel="/2017/03/20/hello-world/index.html" class="item ">
+            <li rel="/2018/10/19/json-to-list/index.html" class="item ">
                 <a href="/comment/" title="留言" class="icon-comment">&nbsp;留言</a>
             </li>
             
@@ -120,25 +120,32 @@
 <!-- 文章 -->
 <article class="post article">
     <header class="text-center">
-        <h3 class="post-title"><span>hello world</span></h3>
+        <h3 class="post-title"><span>c# Json字符串 转为 List</span></h3>
     </header>
     <p class="post-meta text-center">
         xuzg 发表于
-        <time datetime="2017-03-19T16:00:00.000Z">2017-03-20</time>
+        <time datetime="2018-10-19T03:11:14.569Z">2018-10-19</time>
     </p>
     <div class="post-content">
-        <p>某天上网看到了别人高大上的博客，心想那么花哨的东西，我怎么能没有呢？忙活了大半天终于搭建成功了Zzz~ <br><br>以后有些什么东西可以通过这个博客来分享，希望能坚持…</p>
-
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><pre><code>目前在做一个小功能，需要手动构建一个题库，即一个题目和答案对应关系的一个数组。数组对象在js中很容易就拼出来了，但在C#中并不是那么简单...
+</code></pre><h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><blockquote>
+<p>Json字符串数组转 List</p>
+</blockquote>
+<ol>
+<li>使用 <strong>JavaScriptSerializer</strong>，需要引入 <code>System.Web.Extensions</code></li>
+<li>我的项目用的是 .NET Framework4 在vs 2010上找不到这个dll，所以我在目录 <strong>C:\Program Files\Reference Assemblies\Microsoft\Framework\v3.5</strong> 找到这个dll 然后复制到bin底下引用了</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">using System.Web.Script.Serialization;</span><br><span class="line"></span><br><span class="line">namespace ConsoleApplication2</span><br><span class="line">&#123;</span><br><span class="line">    class demo</span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">        public void test()</span><br><span class="line">        &#123;</span><br><span class="line">            string jsonstr = &quot;[&#123;title:\&quot;1、践行全心全意为人民服务的根本宗旨，把党的（ ）贯彻到治国理政全部活动之中，把人民对美好生活的向往作为奋斗目标，依靠人民创造历史伟业。\&quot;, answer: \&quot;群众路线\&quot;&#125;, &#123;title: \&quot;2、党的十九大报告指出，必须坚持和完善中国特色社会主义制度，不断推进国家（ ）和治理能力现代化，坚决破除一切不合时宜的思想观念和体制机制弊端，突破利益固化的藩篱。\&quot;, answer: \&quot;治理体系\&quot;&#125;]&quot;;</span><br><span class="line">            </span><br><span class="line">            JavaScriptSerializer Serializer = new JavaScriptSerializer();</span><br><span class="line">            List&lt;ChoiceQuestion&gt; t = Serializer.Deserialize&lt;List&lt;ChoiceQuestion&gt;&gt;(jsonstr);</span><br><span class="line">            </span><br><span class="line">            // 这里就可以用 t[index].title / t[index].answer 访问了</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public class ChoiceQuestion &#123;</span><br><span class="line">        public string title &#123; get; set; &#125;</span><br><span class="line">        public string answer &#123; get; set; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
     <p class="post-meta">
         <span class="post-cat">分类：
-            <a class="cat-link" href="/categories/生活琐事/">生活琐事</a>
+            <a class="cat-link" href="/categories/技术交流/">技术交流</a>
         </span>
         <span class="post-tags">
             标签：
             
     
-        <a href="/tags/非技术向/" title="非技术向">非技术向</a>
+        <a href="/tags/c/" title="c#">c#</a>
     
 
         </span>
@@ -164,18 +171,18 @@
     
     <span class="prev fl">
         上一篇<br >
-        <a href="/2017/04/17/php-connect-mysql/">
-            
-                php 连接 mysql 操纵数据库
-            
-        </a>
+        <a href="javascript: void(0);">没有上一篇了</a>
     </span>
     
 
     
     <span class="next fr">
         下一篇<br >
-        <a href="javascript: void(0);">没有下一篇了</a>
+        <a href="/2018/09/18/QYWechat/">
+            
+                部署IIS遇到的问题总结
+            
+        </a>
     </span>
     
 </div>
@@ -250,7 +257,7 @@
   <script>
   JELON.Comment({
     container: 'comments',
-    label: 'hello-world' || '2017/03/20/hello-world/',
+    label: 'json-to-list' || '2018/10/19/json-to-list/',
     owner: 'jangdelong',
     repo: 'blog_comments',
     clientId: 'b08ed25e52c57993e69c',
