@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
+    
+    <title>WebBrowser组件使用 ———— 错误码对照处理 | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
+    <meta name="keywords" content="前端, Web, 徐枝国, 前端开发" >
+    <meta name="description" content="徐枝国个人前端小站" >
+
+    
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml" >
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico" >
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</head>
+
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">Hexo</span>
+                    <span class="description">个人前端小站</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2018/11/02/errcode/index.html" class="item ">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2018/11/02/errcode/index.html" class="item ">
+                <a href="/lab/" title="实验室" class="icon-lab">&nbsp;实验室</a>
+            </li>
+            
+            <li rel="/2018/11/02/errcode/index.html" class="item ">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2018/11/02/errcode/index.html" class="item ">
+                <a href="/comment/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        徐枝国
+                        |
+                    
+                        WEB 前端开发工程师
+                        |
+                    
+                        17620136588
+                        
+                    
+                </p>
+                <p class="sns">
+                    
+                        <a href="https://github.com/xuzhiguo" class="qqweibo" target="_blank"><b>■</b> github</a>
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        微信号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/jelon.jpg" alt="avatar" title="头像" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>WebBrowser组件使用 ———— 错误码对照处理</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        xuzg 发表于
+        <time datetime="2018-11-02T02:21:56.255Z">2018-11-02</time>
+    </p>
+    <div class="post-content">
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在搞一个c#自动化的东西，自动登录，自动答题越过这些后去指定网页拿到指定的信息。demo后面会补上，现在有时间先总结一下在操纵IE跳转页面时失败的一些处理吧</p>
+<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><ol>
+<li>首先需要定义一个枚举类型，为了和webBrowser中的NavigateError的参数StatusCode做一个对应关系。StatusCode的字段名和值是从 <code>https://msdn.microsoft.com/zh-cn/library/bb268233(en-us,VS.85).aspx</code> 中拿的，后来为了记录日志的时候提示友好一些，故加上Description。而Description用字段名从 <code>https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/ms775145(v=vs.85)</code>一一匹配，手动加上的。花了我不少时间…</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line">/// &lt;summary&gt;</span><br><span class="line">/// webBrowser 跳转错误时，错误码枚举值</span><br><span class="line">/// &lt;/summary&gt;</span><br><span class="line">public enum ErrorCode</span><br><span class="line">&#123;</span><br><span class="line">    [Description(&quot;错误请求，服务器不理解请求的语法&quot;)]</span><br><span class="line">    HTTP_STATUS_BAD_REQUEST = 400,</span><br><span class="line">    [Description(&quot;身份验证错误，此网页需要授权，您可能没授权&quot;)]</span><br><span class="line">    HTTP_STATUS_DENIED = 401,</span><br><span class="line">    [Description(&quot;保留有效ChargeTo头响应&quot;)]</span><br><span class="line">    HTTP_STATUS_PAYMENT_REQ = 402,</span><br><span class="line">    [Description(&quot;禁止访问，服务器收到请求，但是拒绝提供服务&quot;)]</span><br><span class="line">    HTTP_STATUS_FORBIDDEN = 403,</span><br><span class="line">    [Description(&quot;可连接服务器，但服务器无法取得所请求的网页，请求资源不存在&quot;)]</span><br><span class="line">    HTTP_STATUS_NOT_FOUND = 404,</span><br><span class="line">    [Description(&quot;用户在Request-Line字段定义的方法不允许&quot;)]</span><br><span class="line">    HTTP_STATUS_BAD_METHOD = 405,</span><br><span class="line">    [Description(&quot;根据用户发送的Accept拖，请求资源不可访问&quot;)]</span><br><span class="line">    HTTP_STATUS_NONE_ACCEPTABLE = 406,</span><br><span class="line">    [Description(&quot;类似401，用户必须首先在代理服务器上得到授权&quot;)]</span><br><span class="line">    HTTP_STATUS_PROXY_AUTH_REQ = 407,</span><br><span class="line">    [Description(&quot;超时，客户端没有在用户指定的时间内完成请求&quot;)]</span><br><span class="line">    HTTP_STATUS_REQUEST_TIMEOUT = 408,</span><br><span class="line">    [Description(&quot;对当前资源状态，请求不能完成&quot;)]</span><br><span class="line">    HTTP_STATUS_CONFLICT = 409,</span><br><span class="line">    [Description(&quot;服务器上不再有此资源且无进一步的参考地址&quot;)]</span><br><span class="line">    HTTP_STATUS_GONE = 410,</span><br><span class="line">    [Description(&quot;服务器拒绝用户定义的Content-Length属性请求&quot;)]</span><br><span class="line">    HTTP_STATUS_LENGTH_REQUIRED = 411,</span><br><span class="line">    [Description(&quot;一个或多个请求头字段在当前请求中错误&quot;)]</span><br><span class="line">    HTTP_STATUS_PRECOND_FAILED = 412,</span><br><span class="line">    [Description(&quot;请求的资源大于服务器允许的大小&quot;)]</span><br><span class="line">    HTTP_STATUS_REQUEST_TOO_LARGE = 413,</span><br><span class="line">    [Description(&quot;请求的资源URL长于服务器允许的长度&quot;)]</span><br><span class="line">    HTTP_STATUS_URI_TOO_LONG = 414,</span><br><span class="line">    [Description(&quot;请求资源不支持请求项目格式&quot;)]</span><br><span class="line">    HTTP_STATUS_UNSUPPORTED_MEDIA = 415,</span><br><span class="line">    [Description(&quot;重新发送带&quot;)]</span><br><span class="line">    HTTP_STATUS_RETRY_WITH = 449,</span><br><span class="line">    [Description(&quot;服务器遇到错误，无法完成请求&quot;)]</span><br><span class="line">    HTTP_STATUS_SERVER_ERROR = 500,</span><br><span class="line">    [Description(&quot;未执行&quot;)]</span><br><span class="line">    HTTP_STATUS_NOT_SUPPORTED = 501,</span><br><span class="line">    [Description(&quot;错误的网关&quot;)]</span><br><span class="line">    HTTP_STATUS_BAD_GATEWAY = 502,</span><br><span class="line">    [Description(&quot;服务不可用&quot;)]</span><br><span class="line">    HTTP_STATUS_SERVICE_UNAVAIL = 503,</span><br><span class="line">    [Description(&quot;网关超时&quot;)]</span><br><span class="line">    HTTP_STATUS_GATEWAY_TIMEOUT = 504,</span><br><span class="line">    [Description(&quot;不支持HTTP版本&quot;)]</span><br><span class="line">    HTTP_STATUS_VERSION_NOT_SUP = 505,</span><br><span class="line">    [Description(&quot;无法解析URL&quot;)]</span><br><span class="line">    INET_E_INVALID_URL = -2146697214,</span><br><span class="line">    [Description(&quot;没有建立session会话&quot;)]</span><br><span class="line">    INET_E_NO_SESSION = -2146697213,</span><br><span class="line">    [Description(&quot;连接因特网的尝试失败了&quot;)]</span><br><span class="line">    INET_E_CANNOT_CONNECT = -2146697212,</span><br><span class="line">    [Description(&quot;没有找到服务器或代理&quot;)]</span><br><span class="line">    INET_E_RESOURCE_NOT_FOUND = -2146697211,</span><br><span class="line">    [Description(&quot;没找到请求对象&quot;)]</span><br><span class="line">    INET_E_OBJECT_NOT_FOUND = -2146697210,</span><br><span class="line">    [Description(&quot;建立了Internet连接，但无法检索数据&quot;)]</span><br><span class="line">    INET_E_DATA_NOT_AVAILABLE = -2146697209,</span><br><span class="line">    [Description(&quot;下载失败(连接中断)&quot;)]</span><br><span class="line">    INET_E_DOWNLOAD_FAILURE = -2146697208,</span><br><span class="line">    [Description(&quot;访问对象需要进行身份验证&quot;)]</span><br><span class="line">    INET_E_AUTHENTICATION_REQUIRED = -2146697207,</span><br><span class="line">    [Description(&quot;对象不属于可接受的MIME类型之一&quot;)]</span><br><span class="line">    INET_E_NO_VALID_MEDIA = -2146697206,</span><br><span class="line">    [Description(&quot;网络连接超时&quot;)]</span><br><span class="line">    INET_E_CONNECTION_TIMEOUT = -2146697205,</span><br><span class="line">    [Description(&quot;请求无效&quot;)]</span><br><span class="line">    INET_E_INVALID_REQUEST = -2146697204,</span><br><span class="line">    [Description(&quot;未知协议，也没有插入匹配的协议&quot;)]</span><br><span class="line">    INET_E_UNKNOWN_PROTOCOL = -2146697203,</span><br><span class="line">    [Description(&quot;遇到了与Win32错误消息之一相关的安全问题&quot;)]</span><br><span class="line">    INET_E_SECURITY_PROBLEM = -2146697202,</span><br><span class="line">    [Description(&quot;无法加载该对象&quot;)]</span><br><span class="line">    INET_E_CANNOT_LOAD_DATA = -2146697201,</span><br><span class="line">    [Description(&quot;创建与指定CLSID关联的类的单个未初始化对象失败&quot;)]</span><br><span class="line">    INET_E_CANNOT_INSTANTIATE_OBJECT = -2146697200,</span><br><span class="line">    [Description(&quot;经由WinInet不能重定向&quot;)]</span><br><span class="line">    INET_E_REDIRECT_FAILED = -2146697196,</span><br><span class="line">    [Description(&quot;请求被重定向到一个目录&quot;)]</span><br><span class="line">    INET_E_REDIRECT_TO_DIR = -2146697195,</span><br><span class="line">    [Description(&quot;无法锁定所请求的资源&quot;)]</span><br><span class="line">    INET_E_CANNOT_LOCK_REQUEST = -2146697194,</span><br><span class="line">    [Description(&quot;(微软内部)用扩展绑定重新发布请求&quot;)]</span><br><span class="line">    INET_E_USE_EXTEND_BINDING = -2146697193,</span><br><span class="line">    [Description(&quot;绑定终止&quot;)]</span><br><span class="line">    INET_E_TERMINATED_BIND = -2146697192,</span><br><span class="line">    [Description(&quot;SSL证书无效&quot;)]</span><br><span class="line">    INET_E_INVALID_CERTIFICATE = -2146697191,</span><br><span class="line">    [Description(&quot;用户拒绝下载组件&quot;)]</span><br><span class="line">    INET_E_CODE_DOWNLOAD_DECLINED = -2146696960,</span><br><span class="line">    [Description(&quot;绑定已经完成，结果已经发出，因此您的abort调用已被取消&quot;)]</span><br><span class="line">    INET_E_RESULT_DISPATCHED = -2146696704,</span><br><span class="line">    [Description(&quot;不能替换受SFP保护的文件&quot;)]</span><br><span class="line">    INET_E_CANNOT_REPLACE_SFP_FILE = -2146696448,</span><br><span class="line">    [Description(&quot;ie6适用于Windows XP SP2及以上版本。注册表项策略不允许安装ActiveX控件(由加密文件散列标识)&quot;)]</span><br><span class="line">    INET_E_CODE_INSTALL_BLOCKED_BY_HASH_POLICY = -2146695936,</span><br><span class="line">    [Description(&quot;ie6适用于Windows XP SP2及以上版本。由于页面限制了ActiveX控件的安装，所以没有显示安装ActiveX控件的Authenticode提示符。通常的原因是显示了信息栏而不是Authenticode提示符。&quot;)]</span><br><span class="line">    INET_E_CODE_INSTALL_SUPPRESSED = -2146696192</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>为枚举定义ToDescription方法，C#中的枚举是不支持定义方法的。我们可以为其做一个扩展方法，扩展方法需要一个静态类，参数前要加this ，同时也指定了被扩展的对象，调用时可使用扩展对像的实例调用，也可以使用该静态类来调用，最后返回该枚举实例的Description。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public static class Extension</span><br><span class="line">&#123;</span><br><span class="line">    public static string ToDescription(this ErrorCode myEnum)</span><br><span class="line">    &#123;</span><br><span class="line">        Type type = typeof(ErrorCode);</span><br><span class="line">        FieldInfo info = type.GetField(myEnum.ToString());</span><br><span class="line">        DescriptionAttribute descriptionAttribute = info.GetCustomAttributes(typeof(DescriptionAttribute), true)[0] as DescriptionAttribute;</span><br><span class="line">        if (descriptionAttribute != null)</span><br><span class="line">            return descriptionAttribute.Description;</span><br><span class="line">        else</span><br><span class="line">            return type.ToString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>创建一个处理错误码的方法</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">private static void ie_NavigateError(object pDisp, ref object URL, ref object Frame, ref object StatusCode, ref bool Cancel)</span><br><span class="line">&#123;</span><br><span class="line">    string errMsg = &quot;未知原因&quot;;</span><br><span class="line"></span><br><span class="line">    foreach (ErrorCode ec in Enum.GetValues(typeof(ErrorCode)))</span><br><span class="line">    &#123; </span><br><span class="line">        if((Int32)ec == (Int32)StatusCode)</span><br><span class="line">        &#123;</span><br><span class="line">            string errName = Enum.GetName(typeof(ErrorCode), StatusCode);</span><br><span class="line"></span><br><span class="line">            errMsg = ec.ToDescription(); // 这里就可以得到错误原因，可以用来记录日志</span><br><span class="line">            Console.WriteLine(errName);</span><br><span class="line"></span><br><span class="line">        &#125;            </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>最后把上面的方法委托给 <code>SHDocVw.InternetExplorer</code> 的实例就行了</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SHDocVw.InternetExplorer ie = new SHDocVw.InternetExplorer();</span><br><span class="line"></span><br><span class="line">ie.NavigateError += ie_NavigateError;</span><br></pre></td></tr></table></figure>
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/技术交流/">技术交流</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/c/" title="c#">c#</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="javascript: void(0);">没有上一篇了</a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2018/10/19/json-to-list/">
+            
+                c# Json字符串 转为 List
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    <!--
+    <div class="sign-bar">
+      GitHub 已登录!
+      <span class="sign-link">登出</span>
+    </div>
+    <section class="box">
+      <div class="com-avatar"><img src="/img/jelon.jpg" alt="avatar"></div>
+      <div class="com-text">
+        <div class="main">
+          <textarea class="text-area-edited show" placeholder="欢迎评论！"></textarea>
+          <div class="text-area-preview"></div>
+        </div>
+        <div class="switch">
+          <div class="switch-item on">编辑</div>
+          <div class="switch-item">预览</div>
+        </div>
+        <div class="button">提交</div>
+      </div>
+    </section>
+    <section class="tips">注：评论支持 markdown 语法！</section>
+    <section class="list-wrap">
+      <ul class="list">
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">张德龙</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like liked">已赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">333333</div>
+          </div>
+        </li>
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">刘德华</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like">点赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">vvvvv</div>
+          </div>
+        </li>
+      </ul>
+      <div class="page-nav">
+        <a href="javascript: void(0);" class="item">1</a>
+        <a href="javascript: void(0);" class="item">2</a>
+        <a href="javascript: void(0);" class="item current">3</a>
+      </div>
+    </section>
+    -->
+  </div>
+  <script>
+  JELON.Comment({
+    container: 'comments',
+    label: 'errcode' || '2018/11/02/errcode/',
+    owner: 'jangdelong',
+    repo: 'blog_comments',
+    clientId: 'b08ed25e52c57993e69c',
+    clientSecret: '1cb9545488f0380904b87350e7c5a270ae03bab7'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/技术交流/">技术交流</a>
+        <span class="badge">(15)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/生活琐事/">生活琐事</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/c/" title="c#">c# (4)</a>
+  
+    <a class="tag-item" href="/tags/vue/" title="vue">vue (4)</a>
+  
+    <a class="tag-item" href="/tags/HTTP/" title="HTTP">HTTP (2)</a>
+  
+    <a class="tag-item" href="/tags/样式库/" title="样式库">样式库 (3)</a>
+  
+    <a class="tag-item" href="/tags/git/" title="git">git (1)</a>
+  
+    <a class="tag-item" href="/tags/非技术向/" title="非技术向">非技术向 (1)</a>
+  
+    <a class="tag-item" href="/tags/css/" title="css">css (1)</a>
+  
+    <a class="tag-item" href="/tags/PHP/" title="PHP">PHP (3)</a>
+  
+    <a class="tag-item" href="/tags/Mysql/" title="Mysql">Mysql (1)</a>
+  
+    <a class="tag-item" href="/tags/win10/" title="win10">win10 (1)</a>
+  
+    <a class="tag-item" href="/tags/微信开发/" title="微信开发">微信开发 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.sina.com.cn/u/1825875765" target="_blank" title="网络安全博客">Haoren博客</a>
+        </li>
+    
+        <li>
+            <a href="http://blog.csdn.net/yeweiouyang" target="_blank" title="技术博客">Maxwell博客</a>
+        </li>
+    
+        <li>
+            <a href="http://xuanzh.cc/" target="_blank" title="技术博客">朱旋个人博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2018
+    
+
+    <a href="/">爱生活 爱自己</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>
+</html>
