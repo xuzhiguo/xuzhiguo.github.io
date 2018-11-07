@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
     <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
     
-    <title>php 服务端 设置跨域 CORS | Hexo</title>
+    <title>IIS 调用 COM组件的权限问题 | Hexo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
     <meta name="keywords" content="前端, Web, 徐枝国, 前端开发" >
     <meta name="description" content="徐枝国个人前端小站" >
@@ -56,19 +56,19 @@
         <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
         <ul class="menu hidden" id="JELON__menu">
             
-            <li rel="/2017/04/20/php-cors/index.html" class="item ">
+            <li rel="/2018/11/07/20181107/index.html" class="item ">
                 <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
             </li>
             
-            <li rel="/2017/04/20/php-cors/index.html" class="item ">
+            <li rel="/2018/11/07/20181107/index.html" class="item ">
                 <a href="/lab/" title="实验室" class="icon-lab">&nbsp;实验室</a>
             </li>
             
-            <li rel="/2017/04/20/php-cors/index.html" class="item ">
+            <li rel="/2018/11/07/20181107/index.html" class="item ">
                 <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
             </li>
             
-            <li rel="/2017/04/20/php-cors/index.html" class="item ">
+            <li rel="/2018/11/07/20181107/index.html" class="item ">
                 <a href="/comment/" title="留言" class="icon-comment">&nbsp;留言</a>
             </li>
             
@@ -120,24 +120,42 @@
 <!-- 文章 -->
 <article class="post article">
     <header class="text-center">
-        <h3 class="post-title"><span>php 服务端 设置跨域 CORS</span></h3>
+        <h3 class="post-title"><span>IIS 调用 COM组件的权限问题</span></h3>
     </header>
     <p class="post-meta text-center">
         xuzg 发表于
-        <time datetime="2017-04-19T16:00:00.000Z">2017-04-20</time>
+        <time datetime="2018-11-07T01:35:37.474Z">2018-11-07</time>
     </p>
     <div class="post-content">
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>为什么会产生跨域问题呢？这是由于浏览器为了保证用户信息的安全，防止恶意的网站窃取数据，故禁止不同域之间的JS进行交互。对于浏览器而言只要<strong>域名</strong>、<strong>协议</strong>、<strong>端口</strong>其中一个不同就会引发同源策略，所以我们在做前端开发的时候无所避免地会遇到跨域的问题。解决跨域的方法当然不局限于一种，客户端解决或服务器端解决都行，本文介绍的是从服务端解决的方式。</p>
-<h3 id="允许所有域名访问"><a href="#允许所有域名访问" class="headerlink" title="允许所有域名访问"></a>允许所有域名访问</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">header(&apos;Access-Control-Allow-Origin: *&apos;);</span><br></pre></td></tr></table></figure>
-<h3 id="允许一个域名访问"><a href="#允许一个域名访问" class="headerlink" title="允许一个域名访问"></a>允许一个域名访问</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">header(&apos;Access-Control-Allow-Origin: http://baidu.com&apos;);</span><br></pre></td></tr></table></figure>
-<h3 id="允许多个域名访问"><a href="#允许多个域名访问" class="headerlink" title="允许多个域名访问"></a>允许多个域名访问</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$origin = isset($_SERVER[&apos;HTTP_ORIGIN&apos;])? $_SERVER[&apos;HTTP_ORIGIN&apos;] : &apos;&apos;;  </span><br><span class="line"></span><br><span class="line">$allow_origin = array(  </span><br><span class="line">    &apos;http://baidu.com&apos;,  </span><br><span class="line">    &apos;http://xuzg.com&apos;  </span><br><span class="line">);  </span><br><span class="line">  </span><br><span class="line">if(in_array($origin, $allow_origin))&#123;  </span><br><span class="line">    header(&apos;Access-Control-Allow-Origin:&apos;.$origin);       </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h3><blockquote>
-<p>有一次我改动了PHP文件，然后再访问就提示了这个错误 <strong>Warning: Cannot modify header information - headers already sent by …</strong></p>
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前用 C#.NET 编写了一个 webservice 的接口抓取 OA 系统指定领导名下有没有签报，效果不错。然后领导要求在此基础上，当上级领导有审批意见时，需把该审批意见抓取下来，并通过企业微信推送给他。本来开开心心代码都写好了，vs上跑也没啥问题，但部署到 IIS 上时就报了错。<br></p>
+<blockquote>
+<p>报错为：</p>
 </blockquote>
-<ul>
-<li>原因：空白行导致的问题</li>
-<li>解决方法：检查有&lt;?php … ?&gt; 后面没有空白行，特别是include或者require的文件。不少问题是这些空白行导致的。</li>
-</ul>
+<p><strong>检索 COM 类工厂中 CLSID 为 {0002DF01-0000-0000-C000-000000000046} 的组件失败，原因是出现以下错误: 80070005 拒绝访问。 (异常来自 HRESULT:0x80070005 (E_ACCESSDENIED))。</strong></p>
+<p><br></p>
+<p>百度查，查到的几乎都是关于打开 Word 或 Excel 没权限，需要在组件服务里设置 DCOM配置里指定应用的权限。问题是我是想打开IE，不是Word/Excel啊…<br>在DOCM里看到眼花也没找到ie，就算有长得像的，都是无法设置权限。</p>
+<p><br></p>
+<p>也有帖子说修改 IIS 指定网站的 <strong>身份模拟</strong> 和 Web.Config配置 的 <strong>身份验证</strong> 的，试了半天，也没起作用。后来解决问题后，发现身份验证和身份模拟还是必要的，但还需要加上一点。以下为我的步骤：</p>
+<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><ol>
+<li>Web.Config配置身份验证</li>
+</ol>
+<blockquote>
+<p>  方法一：<br>      直接在 Web.Config 文件中 system.web 节点下新增 <code>&lt;identity impersonate=&quot;true&quot; password=&quot;你的密码&quot; userName=&quot;你的账户&quot; /&gt;</code><br>  方法二：<br>      在IIS网站菜单里打开配置管理器，节点选到system.web/identity，然后填写impersonate、password、userName</p>
+</blockquote>
+<ol start="2">
+<li>添加身份模拟</li>
+</ol>
+<blockquote>
+<p>  在IIS网站菜单里打开身份验证菜单，对着 ASP.NETMO 模拟右键编辑，选择模拟标识为特定用户，设置输入用户名密码确定</p>
+</blockquote>
+<ol start="3">
+<li>设置应用程序池的标识</li>
+</ol>
+<blockquote>
+<p>  找到你网站使用的应用程序池，右键高级设置，在进程模型中找到标识，改为 LocalService（原本为ApplicationPoolIdentity）</p>
+</blockquote>
+<p><br></p>
+<p>搞完这几点就OK了~</p>
 
     </div>
     <p class="post-meta">
@@ -148,7 +166,7 @@
             标签：
             
     
-        <a href="/tags/PHP/" title="PHP">PHP</a>
+        <a href="/tags/c/" title="c#">c#</a>
     
 
         </span>
@@ -174,20 +192,16 @@
     
     <span class="prev fl">
         上一篇<br >
-        <a href="/2017/06/24/git/">
-            
-                git 入门
-            
-        </a>
+        <a href="javascript: void(0);">没有上一篇了</a>
     </span>
     
 
     
     <span class="next fr">
         下一篇<br >
-        <a href="/2017/04/17/php-connect-mysql/">
+        <a href="/2018/11/02/errcode/">
             
-                php 连接 mysql 操纵数据库
+                WebBrowser组件使用 ———— 错误码对照处理
             
         </a>
     </span>
@@ -264,7 +278,7 @@
   <script>
   JELON.Comment({
     container: 'comments',
-    label: 'php-cors' || '2017/04/20/php-cors/',
+    label: '20181107' || '2018/11/07/20181107/',
     owner: 'jangdelong',
     repo: 'blog_comments',
     clientId: 'b08ed25e52c57993e69c',
