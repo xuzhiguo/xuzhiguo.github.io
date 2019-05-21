@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
+    
+    <title>vue 组件间的通信 | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
+    <meta name="keywords" content="前端, Web, 徐枝国, 前端开发" >
+    <meta name="description" content="徐枝国个人前端小站" >
+
+    
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml" >
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico" >
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</head>
+
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">Hexo</span>
+                    <span class="description">个人前端小站</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2019/05/21/vuecompTx/index.html" class="item ">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2019/05/21/vuecompTx/index.html" class="item ">
+                <a href="/lab/" title="实验室" class="icon-lab">&nbsp;实验室</a>
+            </li>
+            
+            <li rel="/2019/05/21/vuecompTx/index.html" class="item ">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2019/05/21/vuecompTx/index.html" class="item ">
+                <a href="/comment/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        徐枝国
+                        |
+                    
+                        WEB 前端开发工程师
+                        |
+                    
+                        17620136588
+                        
+                    
+                </p>
+                <p class="sns">
+                    
+                        <a href="https://github.com/xuzhiguo" class="qqweibo" target="_blank"><b>■</b> github</a>
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        微信号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/xuzhiguo.jpg" alt="avatar" title="头像" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>vue 组件间的通信</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        xuzg 发表于
+        <time datetime="2019-05-21T03:34:11.812Z">2019-05-21</time>
+    </p>
+    <div class="post-content">
+        <h4 id="子组件调父组件的方法"><a href="#子组件调父组件的方法" class="headerlink" title="子组件调父组件的方法"></a>子组件调父组件的方法</h4><ol>
+<li>在子组件中通过 <strong>this.$parent.event</strong></li>
+<li>通过 <strong>$emit</strong> 触发一个事件，父组件监听这个事件</li>
+<li><p>通过 <strong>prop</strong> 传入父组件的方法</p>
+<p> 父组件 Home.vue</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;bor&quot;&gt;</span><br><span class="line">        &lt;h3&gt;&#123;&#123;title&#125;&#125;&lt;/h3&gt;</span><br><span class="line">        &lt;HelloWorld @fatherMethod=&quot;changeTitle&quot;  :changeFatherTitleMethod=&quot;changeTitle&quot; &gt;&lt;/HelloWorld&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    import HelloWorld from &apos;@/components/HelloWorld&apos;;</span><br><span class="line"></span><br><span class="line">    export default &#123;</span><br><span class="line">        data () &#123;</span><br><span class="line">            return &#123;</span><br><span class="line">                title: &apos;父组件 home&apos;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        components: &#123;</span><br><span class="line">            HelloWorld</span><br><span class="line">        &#125;,</span><br><span class="line">        methods: &#123;</span><br><span class="line">            changeTitle(text) &#123;</span><br><span class="line">                this.title = text;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style  scoped&gt;</span><br><span class="line">    .bor &#123;</span><br><span class="line">        padding: 5px;</span><br><span class="line">        margin: 5px;</span><br><span class="line">        border: solid 1px #000;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<pre><code>子组件 HelloWorld.vue
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;bor&quot;&gt;</span><br><span class="line">        &lt;h3&gt;子组件  hello world！&lt;/h3&gt;</span><br><span class="line">        &lt;button @click=&quot;changeParentTitle1&quot;&gt;通过 this.$parent.event 调用父组件的方法&lt;/button&gt;</span><br><span class="line">        &lt;button @click=&quot;changeParentTitle2&quot;&gt;通过 $emit 触发一个事件，父组件监听这个事件&lt;/button&gt;</span><br><span class="line">        &lt;button @click=&quot;changeParentTitle3&quot;&gt;通过 prop 传入父组件的方法&lt;/button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    export default &#123;</span><br><span class="line">      props: &#123;</span><br><span class="line">        changeFatherTitleMethod: &#123;</span><br><span class="line">          type: Function</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      data () &#123;</span><br><span class="line">          return &#123;</span><br><span class="line"></span><br><span class="line">          &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      methods: &#123;</span><br><span class="line">        changeParentTitle1() &#123;</span><br><span class="line">          this.$parent.changeTitle(&apos;通过 this.$parent.event 调用父组件的方法&apos;);</span><br><span class="line">        &#125;,</span><br><span class="line">        changeParentTitle2() &#123;</span><br><span class="line">          this.$emit(&apos;fatherMethod&apos;, &apos;通过 $emit 触发一个事件，父组件监听这个事件&apos;);</span><br><span class="line">        &#125;,</span><br><span class="line">        changeParentTitle3() &#123;</span><br><span class="line">          this.changeFatherTitleMethod(&apos;通过 prop 传入父组件的方法&apos;);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style  scoped&gt;</span><br><span class="line">  .bor &#123;</span><br><span class="line">    padding: 10px;</span><br><span class="line">    margin: 5px;</span><br><span class="line">    border: solid 1px #000;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  button &#123;</span><br><span class="line">    width: 100%;</span><br><span class="line">    margin: 5px 0;</span><br><span class="line">    padding: 10px;</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+</code></pre><h4 id="父组件调用子组件的方法"><a href="#父组件调用子组件的方法" class="headerlink" title="父组件调用子组件的方法"></a>父组件调用子组件的方法</h4><ol>
+<li>通过 <strong>$refs</strong> 调用子组件的方法</li>
+<li><p>通过 <strong>$emit</strong> 触发事件， 子组件监听该事件</p>
+<ul>
+<li><p>父组件 Home.vue</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">    </span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;bor&quot;&gt;</span><br><span class="line">        &lt;h3&gt;&#123;&#123;title&#125;&#125;&lt;/h3&gt;</span><br><span class="line">        &lt;HelloWorld  ref=&quot;hello&quot;&gt;&lt;/HelloWorld&gt;</span><br><span class="line"></span><br><span class="line">        &lt;button @click=&quot;changeChildTitle1&quot;&gt;通过 $refs 调用子组件的方法&lt;/button&gt;</span><br><span class="line">        &lt;button @click=&quot;changeChildTitle2&quot;&gt;通过 $emit 触发事件， 子组件监听该事件 &lt;/button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    import HelloWorld from &apos;@/components/HelloWorld&apos;;</span><br><span class="line"></span><br><span class="line">    export default &#123;</span><br><span class="line">        data () &#123;</span><br><span class="line">            return &#123;</span><br><span class="line">                title: &apos;父组件 home&apos;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        components: &#123;</span><br><span class="line">            HelloWorld</span><br><span class="line">        &#125;,</span><br><span class="line">        methods: &#123;</span><br><span class="line">            changeChildTitle1() &#123;</span><br><span class="line">                this.$refs.hello.changeTitle(&apos;父组件 通过 $ref 调用子组件的方法&apos;);</span><br><span class="line">            &#125;,</span><br><span class="line">            changeChildTitle2() &#123;</span><br><span class="line">                this.$refs.hello.$emit(&apos;changeTitle&apos;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style  scoped&gt;</span><br><span class="line">    .bor &#123;</span><br><span class="line">        padding: 5px;</span><br><span class="line">        margin: 5px;</span><br><span class="line">        border: solid 1px #000;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    button &#123;</span><br><span class="line">        width: 100%;</span><br><span class="line">        margin: 5px 0;</span><br><span class="line">        padding: 10px;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<pre><code>- 子组件 HelloWorld.vue
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">    </span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;bor&quot;&gt;</span><br><span class="line">        &lt;h3&gt;&#123;&#123;title&#125;&#125;&lt;/h3&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    export default &#123;</span><br><span class="line">      data () &#123;</span><br><span class="line">          return &#123;</span><br><span class="line">            title: &apos;子组件  hello world！&apos;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      methods: &#123;</span><br><span class="line">        changeTitle(text) &#123;</span><br><span class="line">          this.title = text;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      mounted() &#123;</span><br><span class="line">        this.$on(&apos;changeTitle&apos;, ()=&gt; &#123;</span><br><span class="line">          this.changeTitle(&apos;父组件通过 $emit 触发事件， 子组件监听该事件 &apos;);</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style  scoped&gt;</span><br><span class="line">  .bor &#123;</span><br><span class="line">    padding: 10px;</span><br><span class="line">    margin: 5px;</span><br><span class="line">    border: solid 1px #000;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  button &#123;</span><br><span class="line">    width: 100%;</span><br><span class="line">    margin: 5px 0;</span><br><span class="line">    padding: 10px;</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+</code></pre>
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/技术交流/">技术交流</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/vue/" title="vue">vue</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="javascript: void(0);">没有上一篇了</a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2019/05/05/vueFaceIcon/">
+            
+                vue 支持emoji表情
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    <!--
+    <div class="sign-bar">
+      GitHub 已登录!
+      <span class="sign-link">登出</span>
+    </div>
+    <section class="box">
+      <div class="com-avatar"><img src="/img/jelon.jpg" alt="avatar"></div>
+      <div class="com-text">
+        <div class="main">
+          <textarea class="text-area-edited show" placeholder="欢迎评论！"></textarea>
+          <div class="text-area-preview"></div>
+        </div>
+        <div class="switch">
+          <div class="switch-item on">编辑</div>
+          <div class="switch-item">预览</div>
+        </div>
+        <div class="button">提交</div>
+      </div>
+    </section>
+    <section class="tips">注：评论支持 markdown 语法！</section>
+    <section class="list-wrap">
+      <ul class="list">
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">张德龙</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like liked">已赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">333333</div>
+          </div>
+        </li>
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">刘德华</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like">点赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">vvvvv</div>
+          </div>
+        </li>
+      </ul>
+      <div class="page-nav">
+        <a href="javascript: void(0);" class="item">1</a>
+        <a href="javascript: void(0);" class="item">2</a>
+        <a href="javascript: void(0);" class="item current">3</a>
+      </div>
+    </section>
+    -->
+  </div>
+  <script>
+  JELON.Comment({
+    container: 'comments',
+    label: 'vuecompTx' || '2019/05/21/vuecompTx/',
+    owner: 'jangdelong',
+    repo: 'blog_comments',
+    clientId: 'b08ed25e52c57993e69c',
+    clientSecret: '1cb9545488f0380904b87350e7c5a270ae03bab7'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/技术交流/">技术交流</a>
+        <span class="badge">(25)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/生活琐事/">生活琐事</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/c/" title="c#">c# (5)</a>
+  
+    <a class="tag-item" href="/tags/vue/" title="vue">vue (9)</a>
+  
+    <a class="tag-item" href="/tags/HTTP/" title="HTTP">HTTP (2)</a>
+  
+    <a class="tag-item" href="/tags/js/" title="js">js (3)</a>
+  
+    <a class="tag-item" href="/tags/样式库/" title="样式库">样式库 (3)</a>
+  
+    <a class="tag-item" href="/tags/非技术向/" title="非技术向">非技术向 (1)</a>
+  
+    <a class="tag-item" href="/tags/git/" title="git">git (1)</a>
+  
+    <a class="tag-item" href="/tags/css/" title="css">css (1)</a>
+  
+    <a class="tag-item" href="/tags/nginx/" title="nginx">nginx (1)</a>
+  
+    <a class="tag-item" href="/tags/IOS/" title="IOS">IOS (1)</a>
+  
+    <a class="tag-item" href="/tags/PHP/" title="PHP">PHP (3)</a>
+  
+    <a class="tag-item" href="/tags/Mysql/" title="Mysql">Mysql (1)</a>
+  
+    <a class="tag-item" href="/tags/微信开发/" title="微信开发">微信开发 (1)</a>
+  
+    <a class="tag-item" href="/tags/微信小程序/" title="微信小程序">微信小程序 (1)</a>
+  
+    <a class="tag-item" href="/tags/win10/" title="win10">win10 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.sina.com.cn/u/1825875765" target="_blank" title="网络安全博客">Haoren博客</a>
+        </li>
+    
+        <li>
+            <a href="http://blog.csdn.net/yeweiouyang" target="_blank" title="技术博客">Maxwell博客</a>
+        </li>
+    
+        <li>
+            <a href="http://xuanzh.cc/" target="_blank" title="技术博客">朱旋个人博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2019
+    
+
+    <a href="/">爱生活 爱自己</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>
+</html>
