@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
     <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
     
-    <title>vue 支持emoji表情 | Hexo</title>
+    <title>Vue全家桶+SSR+Koa2全栈开发美团网 遇到的一些问题 | Hexo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
     <meta name="keywords" content="前端, Web, 徐枝国, 前端开发" >
     <meta name="description" content="徐枝国个人前端小站" >
@@ -56,19 +56,19 @@
         <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
         <ul class="menu hidden" id="JELON__menu">
             
-            <li rel="/2019/05/05/vueFaceIcon/index.html" class="item ">
+            <li rel="/2019/07/06/vue-q1/index.html" class="item ">
                 <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
             </li>
             
-            <li rel="/2019/05/05/vueFaceIcon/index.html" class="item ">
+            <li rel="/2019/07/06/vue-q1/index.html" class="item ">
                 <a href="/lab/" title="实验室" class="icon-lab">&nbsp;实验室</a>
             </li>
             
-            <li rel="/2019/05/05/vueFaceIcon/index.html" class="item ">
+            <li rel="/2019/07/06/vue-q1/index.html" class="item ">
                 <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
             </li>
             
-            <li rel="/2019/05/05/vueFaceIcon/index.html" class="item ">
+            <li rel="/2019/07/06/vue-q1/index.html" class="item ">
                 <a href="/comment/" title="留言" class="icon-comment">&nbsp;留言</a>
             </li>
             
@@ -120,19 +120,28 @@
 <!-- 文章 -->
 <article class="post article">
     <header class="text-center">
-        <h3 class="post-title"><span>vue 支持emoji表情</span></h3>
+        <h3 class="post-title"><span>Vue全家桶+SSR+Koa2全栈开发美团网 遇到的一些问题</span></h3>
     </header>
     <p class="post-meta text-center">
         xuzg 发表于
-        <time datetime="2019-05-05T00:53:07.852Z">2019-05-05</time>
+        <time datetime="2019-07-06T09:21:00.171Z">2019-07-06</time>
     </p>
     <div class="post-content">
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><pre><code>之前做了个消息推送的小插件应用，领导使用时在消息的内容里使用了表情，结果推送失败。为了支持这种情况，看了一些网上大佬的帖子，发现只要转为字符实体就可以解决这个问题。
-</code></pre><h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><pre><code>1. 在调推送接口时，通过以下函数把，推送的字符串中的表情转为字符实体，这些字符实体存数据库时不会报错。
-    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function utf16toEntities(str) &#123;</span><br><span class="line">    var patt=/[\ud800-\udbff][\udc00-\udfff]/g; // 检测utf16字符正则</span><br><span class="line">    str = str.replace(patt, function(char)&#123;</span><br><span class="line">            var H, L, code;</span><br><span class="line">            if (char.length===2) &#123;</span><br><span class="line">                H = char.charCodeAt(0); // 取出高位</span><br><span class="line">                L = char.charCodeAt(1); // 取出低位</span><br><span class="line">                code = (H - 0xD800) * 0x400 + 0x10000 + L - 0xDC00; // 转换算法</span><br><span class="line">                return &quot;&amp;#&quot; + code + &quot;;&quot;;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                return char;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    return str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h3 id="1-如何在-Koa2-中用es6的-import-代替-require-这种引入方式"><a href="#1-如何在-Koa2-中用es6的-import-代替-require-这种引入方式" class="headerlink" title="1. 如何在 Koa2 中用es6的 import 代替 require 这种引入方式"></a>1. 如何在 Koa2 中用es6的 import 代替 require 这种引入方式</h3><p>1) 安装 babel-cli<br>2) 把 package.json 中的 start 改为 cross-env NODE_ENV=production babel-node server/index.js</p>
+<h3 id="2-启动-mongoDB-时报错-Data-directory-D-data-db-not-found-terminating"><a href="#2-启动-mongoDB-时报错-Data-directory-D-data-db-not-found-terminating" class="headerlink" title="2. 启动 mongoDB 时报错 Data directory D:\data\db\ not found., terminating"></a>2. 启动 mongoDB 时报错 Data directory D:\data\db\ not found., terminating</h3><ul>
+<li>应该是没有指定数据库保存目录的原因，执行以下命令：<br>mongod -dbpath &lt;你想保存的目录&gt;<br>例如：mongod -dbpath D:\Program Files\MongoDB\Server\4.0\data\db</li>
+</ul>
+<h3 id="3-redis-启动-报错-Warning-no-config-file-specified-using-the-default-config-In-order-to-specify-a-config-file-use-redis-server-path-to-redis-conf"><a href="#3-redis-启动-报错-Warning-no-config-file-specified-using-the-default-config-In-order-to-specify-a-config-file-use-redis-server-path-to-redis-conf" class="headerlink" title="3. redis 启动 报错 Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf"></a>3. redis 启动 报错 Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf</h3><ul>
+<li>感觉是 redis 是已经启动了，但是假死状态（连不上…），执行下面命令，关闭重启就行了<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; redis-cli</span><br><span class="line">127.0.0.1:6379&gt; shutdown</span><br><span class="line">not connected&gt; exit</span><br><span class="line"></span><br><span class="line">&gt; redis-server</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-npm-run-dev-启动项目时提示-BrowserslistError-Unknown-browser-query-android-all"><a href="#4-npm-run-dev-启动项目时提示-BrowserslistError-Unknown-browser-query-android-all" class="headerlink" title="4. npm run dev 启动项目时提示 BrowserslistError: Unknown browser query android all"></a>4. npm run dev 启动项目时提示 BrowserslistError: Unknown browser query android all</h3><ul>
+<li>感觉是 browserslist 版本更新的问题，我重装了依赖后，就开始报这个警告</li>
+<li>github 上 browserslist 的 Issues <a href="https://github.com/browserslist/browserslist/issues/382" target="_blank" rel="noopener">链接</a></li>
+<li>按照 Issues 上大佬的提示，执行以下步骤，解决了<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1.先把目录底下的 node_modules 和 package-lock.json 删除</span><br><span class="line"></span><br><span class="line">2. 执行以下命令</span><br><span class="line">  npm cache clean --force</span><br><span class="line">  npm install </span><br><span class="line">  npm install caniuse-lite@1.0.30000974</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
-2. 在渲染通知内容时，使用 v-html 指令来渲染。如用 {{}} 或 v-bind 来渲染的话，只能渲染为文字。
-</code></pre>
     </div>
     <p class="post-meta">
         <span class="post-cat">分类：
@@ -144,7 +153,11 @@
     
         <a href="/tags/vue/" title="vue">vue</a> / 
     
-        <a href="/tags/js/" title="js">js</a>
+        <a href="/tags/redis/" title="redis">redis</a> / 
+    
+        <a href="/tags/mongoDB/" title="mongoDB">mongoDB</a> / 
+    
+        <a href="/tags/koa/" title="koa">koa</a>
     
 
         </span>
@@ -170,20 +183,16 @@
     
     <span class="prev fl">
         上一篇<br >
-        <a href="/2019/05/21/vuecompTx/">
-            
-                vue 组件间的通信
-            
-        </a>
+        <a href="javascript: void(0);">没有上一篇了</a>
     </span>
     
 
     
     <span class="next fr">
         下一篇<br >
-        <a href="/2019/04/30/iosBug/">
+        <a href="/2019/05/21/vuecompTx/">
             
-                js 中使用 时间datetime 类型到前端 iOS 不兼容问题
+                vue 组件间的通信
             
         </a>
     </span>
@@ -260,7 +269,7 @@
   <script>
   JELON.Comment({
     container: 'comments',
-    label: 'vueFaceIcon' || '2019/05/05/vueFaceIcon/',
+    label: 'vue-q1' || '2019/07/06/vue-q1/',
     owner: 'jangdelong',
     repo: 'blog_comments',
     clientId: 'b08ed25e52c57993e69c',
